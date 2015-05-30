@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<body>
+
+
+
+  <header id="header" th:fragment="header">
+    <img src="/resources/img/banniere.jpg" alt="" />
+
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container-fluid">
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a th:href="@{/}" th:text="#{nav.elt1}">ELT1</a></li>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:ouvrirPopinConnexion()" th:text="#{nav.compte}">CPT</a></li>
+          </ul>
+        </div>
+
+        <!--/.nav-collapse -->
+      </div>
+      <!--/.container-fluid -->
+    </nav>
+  </header>
+
+
+
+</body>
+</html>
