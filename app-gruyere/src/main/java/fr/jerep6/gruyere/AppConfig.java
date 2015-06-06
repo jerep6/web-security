@@ -1,5 +1,6 @@
 package fr.jerep6.gruyere;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.context.MessageSource;
@@ -11,6 +12,9 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -30,6 +34,7 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 // to get the property resolution mechanism working.
 // http://www.baeldung.com/2012/02/06/properties-with-spring/
 @PropertySource("classpath:properties/environment.properties")
+@EnableTransactionManagement
 public class AppConfig extends WebMvcConfigurerAdapter {
   @Bean
   public static PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
@@ -79,7 +84,27 @@ public class AppConfig extends WebMvcConfigurerAdapter {
   public DataSource dataSource() {
     return new EmbeddedDatabaseBuilder().setName("gruyere")
         .setType(EmbeddedDatabaseType.HSQL)
-        .addScript("classpath:database/schema.sql").build();
+        .addScript("classpath:database/schema.sql")
+        .addScript("classpath:database/data.sql").build();
   }
+
+  @Bean
+  public EntityManagerFactory entityManagerFactory() {
+    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setGenerateDdl(Boolean.FALSE);
+    vendorAdapter.setShowSql(Boolean.TRUE);
+    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+    factory.setJpaVendorAdapter(vendorAdapter);
+    factory.setPackagesToScan("fr.jerep6.gruyere.persistance");
+    factory.setDataSource(dataSource());
+    factory.afterPropertiesSet();
+    // factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
+    return factory.getObject();
+  }
+
+  // @Bean
+  // public HibernateExceptionTranslator hibernateExceptionTranslator() {
+  // return new HibernateExceptionTranslator();
+  // }
 
 }
