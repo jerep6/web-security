@@ -48,7 +48,7 @@ public class Utilisateur {
 
   @Override
   public String toString() {
-    return "Produit [techid=" + techid + ", login=" + login + "]";
+    return "Utilisateur [techid=" + techid + ", login=" + login + "]";
   }
 
 }

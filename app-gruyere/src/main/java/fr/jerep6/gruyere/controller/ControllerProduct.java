@@ -9,11 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.dao.DaoProduit;
 
 @Controller
+@SessionAttributes("utilisateur")
 public class ControllerProduct {
   @Autowired
   private DaoProduit daoProduit;
@@ -22,11 +24,10 @@ public class ControllerProduct {
   public String index(Model model) {
 
     List<Produit> produits = daoProduit.lire();
-    System.out.println(produits);
 
     Map<String, String> tplMiddle = new HashMap<>();
-    tplMiddle.put("html", "fragments/order");
-    tplMiddle.put("frg", "order_create");
+    tplMiddle.put("html", "fragments/produit-liste");
+    tplMiddle.put("frg", ".produit-list");
     model.addAttribute("tpl_middle", tplMiddle);
     model.addAttribute("produits", produits);
     return "index";

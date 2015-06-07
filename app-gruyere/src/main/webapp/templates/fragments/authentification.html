@@ -1,0 +1,25 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<section class="row authentification">
+      <div class="col-sm-12">
+        <h1>Connectez vous</h1>
+        <form class="form-inline" method="POST" action="/authentification-process">
+          <div class="form-group">
+            <label class="sr-only" for="login">Login</label>
+            <input type="text" class="form-control" id="login" name="login" placeholder="Login" />
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="pwd">Mot de passe</label>
+            <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Mot de passe" />
+          </div>
+          <button type="submit" class="btn btn-default">Connexion</button>
+        </form>
+      </div>
+    </section>
+	
+	
+</body>
+</html>

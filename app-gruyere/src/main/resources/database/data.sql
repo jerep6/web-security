@@ -11,6 +11,9 @@ VALUES (3, 'Pokemon Florizarre', 'Florizarre qui fouette avec ses liannes', 8.67
 INSERT INTO UTILISATEUR (UTI_ID, UTI_LOGIN, UTI_PWD) 
 VALUES (1, 'jeremy', '123456');
 
+INSERT INTO UTILISATEUR (UTI_ID, UTI_LOGIN, UTI_PWD) 
+VALUES (2, 'pauline', 'popo');
+
 
 INSERT INTO COMMENTAIRE (COM_ID, COM_CONTENU, PRD_ID, UTI_ID) 
 VALUES (1, 'Le pikachu est-il fournit avec les piles ?', 1, 1);

@@ -16,8 +16,9 @@
             <li class="active"><a th:href="@{/}" th:text="#{nav.elt1}">ELT1</a></li>
           </ul>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="javascript:ouvrirPopinConnexion()" th:text="#{nav.compte}">CPT</a></li>
+            <ul class="nav navbar-nav navbar-right">
+              <li th:if="${session.utilisateur} == null"><a href="/authentification" th:text="#{nav.compte.non_connecte}">CPT</a></li>
+              <li th:if="${session.utilisateur} != null"><a href="/authentification" th:text="#{nav.compte.connecte(${session.utilisateur.login})}">Bienvenue</a></li>
           </ul>
         </div>
 
