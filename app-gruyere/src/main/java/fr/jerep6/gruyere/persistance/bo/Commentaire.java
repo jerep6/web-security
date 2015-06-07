@@ -25,6 +25,34 @@ public class Commentaire {
   @JoinColumn(name = "PRD_ID", nullable = false)
   private Produit produit;
 
+  @ManyToOne
+  @JoinColumn(name = "UTI_ID", nullable = false)
+  private Utilisateur utilisateur;
+
+  public Integer getTechid() {
+    return techid;
+  }
+
+  public void setTechid(Integer techid) {
+    this.techid = techid;
+  }
+
+  public String getContenu() {
+    return contenu;
+  }
+
+  public void setContenu(String contenu) {
+    this.contenu = contenu;
+  }
+
+  public Produit getProduit() {
+    return produit;
+  }
+
+  public void setProduit(Produit produit) {
+    this.produit = produit;
+  }
+
   @Override
   public String toString() {
     return "Produit [techid=" + techid + ", contenu=" + contenu + "]";

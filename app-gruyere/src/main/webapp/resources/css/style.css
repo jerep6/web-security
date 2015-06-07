@@ -1,6 +1,7 @@
 @media (min-width: 1200px) {
-.container{
-    max-width: 800px;
+  .container{
+      max-width: 800px;
+  }
 }
 
 header img {
@@ -22,6 +23,13 @@ footer .footer-container {
 	width: 100%;
 }
 
-.produit-list-utilisateur p{
+.produit-list-compte-client p{
 	text-align: center;
+}
+
+.produit-modication .btn-primary {
+  margin: auto;
+  margin-top:20px;
+  display: block;
+  width: 80%;
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<section class="row produit-list produit-list-catalogue">
+      <div th:each="prod : ${produits}" class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <img th:src="${prod.image}" alt="" />
+          <div class="caption">
+            <h3 th:text="${prod.titre}"></h3>
+            <p th:text="${prod.description}"></p>
+            <p><a th:href="'/produits/'+${prod.techid}" class="btn btn-primary" role="button">Acheter</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="row produit-detail-catalogue" th:object="${produit}">
+      <div class="col-sm-12">
+        
+        <!-- commentaires -->
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>Questions / Réponses</h3>
+            <ul class="media-list commentaires ">
+              <li th:each="com : *{commentaires}" class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="/resources/img/commentaire.svg" alt="" />
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">popo</h4>
+                  <p th:text="${com.contenu}"></p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </section>
+	
+</body>
+</html>

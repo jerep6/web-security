@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +57,7 @@ public class ControllerCompteClient {
       tplMiddle.put("html", "fragments/authentification");
       tplMiddle.put("frg", ".authentification");
       model.addAttribute("tpl_middle", tplMiddle);
+
       return "redirect:/";
     }
 
@@ -64,14 +66,29 @@ public class ControllerCompteClient {
   @RequestMapping(value = "/compte/produits", method = RequestMethod.GET)
   public String listerProduitUtilisateur(Model model,
       @ModelAttribute("utilisateur") Utilisateur utilisateur) {
-    List<Produit> produitsUtilisateur = daoProduit
-        .listerProduitUtilisateur(utilisateur);
+    List<Produit> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateur);
 
     Map<String, String> tplMiddle = new HashMap<>();
-    tplMiddle.put("html", "fragments/produit-liste");
-    tplMiddle.put("frg", ".produit-list-utilisateur");
+    tplMiddle.put("html", "fragments/produit-compte-client");
+    tplMiddle.put("frg", ".produit-list-compte-client");
     model.addAttribute("tpl_middle", tplMiddle);
     model.addAttribute("produits", produitsUtilisateur);
+
+    return "index";
+  }
+
+  @RequestMapping(value = "/compte/produits/{produit_id}", method = RequestMethod.GET)
+  public String modifierProduit(Model model, @PathVariable("produit_id") Integer produitId,
+      @ModelAttribute("utilisateur") Utilisateur utilisateur) {
+
+    Produit produit = daoProduit.lire(produitId);
+
+    Map<String, String> tplMiddle = new HashMap<>();
+    tplMiddle.put("html", "fragments/produit-compte-client");
+    tplMiddle.put("frg", ".produit-modication-compte-client");
+    model.addAttribute("tpl_middle", tplMiddle);
+    model.addAttribute("produit", produit);
+
     return "index";
   }
 }

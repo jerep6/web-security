@@ -23,9 +23,9 @@ public class DaoProduit {
   @PersistenceContext
   private EntityManager em;
 
-  public List<Produit> lire() {
-    TypedQuery<Produit> query = em.createQuery(
-        "SELECT p FROM " + Produit.class.getName() + " p", Produit.class);
+  public List<Produit> listerTousLesProduits() {
+    TypedQuery<Produit> query = em.createQuery("SELECT p FROM " + Produit.class.getName() + " p",
+        Produit.class);
     return query.getResultList();
   }
 
@@ -40,6 +40,22 @@ public class DaoProduit {
     query.setParameter("UTI_ID", utilisateur.getTechid());
 
     return query.getResultList();
+  }
+
+  public Produit lire(Integer produitId) {
+    Preconditions.checkNotNull(produitId);
+
+    StringBuilder sb = new StringBuilder();
+    sb.append("SELECT distinct p FROM " + Produit.class.getName() + " p");
+    sb.append(" JOIN FETCH p.commentaires");
+    sb.append(" JOIN FETCH p.proprietaire");
+    sb.append(" WHERE p.techid =:PRD_ID");
+
+    LOGGER.debug("JPQL : {}", sb.toString());
+    TypedQuery<Produit> query = em.createQuery(sb.toString(), Produit.class);
+    query.setParameter("PRD_ID", produitId);
+
+    return query.getSingleResult();
   }
 
 }
