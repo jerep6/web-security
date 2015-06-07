@@ -14,6 +14,14 @@ footer .footer-container {
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.33);
 }
 
-.produit-list .btn-primary {
+.produit-list img {
+	max-height: 200px;
+}
+
+.produit-list-catalogue .btn-primary {
 	width: 100%;
+}
+
+.produit-list-utilisateur p{
+	text-align: center;
 }

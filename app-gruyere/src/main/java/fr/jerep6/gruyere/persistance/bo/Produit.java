@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +37,18 @@ public class Produit {
 
   @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
   private Set<Commentaire> commentaires = new HashSet<>(0);
+
+  @OneToOne(optional = false)
+  @JoinColumn(name = "UTI_ID")
+  private Utilisateur proprietaire;
+
+  public Utilisateur getProprietaire() {
+    return proprietaire;
+  }
+
+  public void setProprietaire(Utilisateur proprietaire) {
+    this.proprietaire = proprietaire;
+  }
 
   public Set<Commentaire> getCommentaires() {
     return commentaires;

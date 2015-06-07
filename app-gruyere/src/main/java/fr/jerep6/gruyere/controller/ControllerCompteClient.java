@@ -1,6 +1,7 @@
 package fr.jerep6.gruyere.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -8,12 +9,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
+import fr.jerep6.gruyere.persistance.dao.DaoProduit;
 import fr.jerep6.gruyere.persistance.dao.DaoUtilisateur;
 
 @Controller
@@ -23,6 +27,9 @@ public class ControllerCompteClient {
 
   @Autowired
   private DaoUtilisateur daoUtilisateur;
+
+  @Autowired
+  private DaoProduit daoProduit;
 
   @RequestMapping(value = "/authentification", method = RequestMethod.GET)
   public String index(Model model) {
@@ -52,5 +59,19 @@ public class ControllerCompteClient {
       return "redirect:/";
     }
 
+  }
+
+  @RequestMapping(value = "/compte/produits", method = RequestMethod.GET)
+  public String listerProduitUtilisateur(Model model,
+      @ModelAttribute("utilisateur") Utilisateur utilisateur) {
+    List<Produit> produitsUtilisateur = daoProduit
+        .listerProduitUtilisateur(utilisateur);
+
+    Map<String, String> tplMiddle = new HashMap<>();
+    tplMiddle.put("html", "fragments/produit-liste");
+    tplMiddle.put("frg", ".produit-list-utilisateur");
+    model.addAttribute("tpl_middle", tplMiddle);
+    model.addAttribute("produits", produitsUtilisateur);
+    return "index";
   }
 }

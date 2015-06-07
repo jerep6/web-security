@@ -3,7 +3,7 @@
 	xmlns:th="http://www.thymeleaf.org">
 <body>
 
-	<section class="row produit-list">
+	<section class="row produit-list produit-list-catalogue">
       <div th:each="prod : ${produits}" class="col-sm-6 col-md-4">
         <div class="thumbnail">
           <img th:src="${prod.image}" alt="" />
@@ -11,6 +11,27 @@
             <h3 th:text="${prod.titre}"></h3>
             <p th:text="${prod.description}"></p>
             <p><a th:href="'/produit/'+${prod.techid}" class="btn btn-primary" role="button">Acheter</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <section class="row produit-list produit-list-utilisateur">
+      <div class="col-sm-12">
+        <h1>Mes articles en vente</h1>
+        <div class="row">
+          <div th:each="prod : ${produits}" class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+              <img th:src="${prod.image}" alt="" />
+              <div class="caption">
+                <h3 th:text="${prod.titre}"></h3>
+                <p>
+                  <a th:href="'/compte/produits/'+${prod.techid}" class="btn btn-primary" role="button">Modifier</a>
+                  <a    href="#" class="btn btn-danger" role="button">Supprimer</a>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
