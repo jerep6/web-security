@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 @Entity
@@ -36,6 +37,7 @@ public class Produit {
   private String image;
 
   @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
+  @OrderBy("techid ASC")
   private Set<Commentaire> commentaires = new HashSet<>(0);
 
   @OneToOne(optional = false)
