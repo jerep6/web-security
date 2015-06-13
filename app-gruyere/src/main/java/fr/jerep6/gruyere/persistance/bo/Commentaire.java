@@ -53,6 +53,14 @@ public class Commentaire {
     this.produit = produit;
   }
 
+  public Utilisateur getUtilisateur() {
+    return utilisateur;
+  }
+
+  public void setUtilisateur(Utilisateur utilisateur) {
+    this.utilisateur = utilisateur;
+  }
+
   @Override
   public String toString() {
     return "Produit [techid=" + techid + ", contenu=" + contenu + "]";

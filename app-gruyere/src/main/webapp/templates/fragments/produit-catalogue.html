@@ -39,6 +39,16 @@
           </div>
         </div>
         
+        <div class="row post-comment" th:if="${session.utilisateur} != null">
+          <div class="col-sm-12">
+            <h3>Poser une question</h3>
+            <form th:action="'/produits/'+${produit.techid}+'/questions'" method="post">
+              <textarea class="form-control" rows="3" name="question"></textarea>
+              <button type="submit" class="btn btn-default">Soumettre</button>
+            </form>
+          </div>
+        </div>
+        
       </div>
     </section>
 	

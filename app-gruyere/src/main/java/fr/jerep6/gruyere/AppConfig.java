@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -45,8 +47,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
   /** Serve statics resources (css, images, js; ...) */
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/resources/**").addResourceLocations(
-        "/resources/");
+    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
   }
 
   @Bean
@@ -82,10 +83,9 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 
   @Bean
   public DataSource dataSource() {
-    return new EmbeddedDatabaseBuilder().setName("gruyere")
-        .setType(EmbeddedDatabaseType.HSQL)
-        .addScript("classpath:database/schema.sql")
-        .addScript("classpath:database/data.sql").build();
+    return new EmbeddedDatabaseBuilder().setName("gruyere").setType(EmbeddedDatabaseType.HSQL)
+        .addScript("classpath:database/schema.sql").addScript("classpath:database/data.sql")
+        .build();
   }
 
   @Bean
@@ -100,6 +100,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     factory.afterPropertiesSet();
     // factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
     return factory.getObject();
+  }
+
+  @Bean
+  public PlatformTransactionManager txManager() {
+    return new DataSourceTransactionManager(dataSource());
   }
 
   // @Bean

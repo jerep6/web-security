@@ -19,9 +19,22 @@ footer .footer-container {
 	max-height: 200px;
 }
 
+
+/* Catalogue */
 .produit-list-catalogue .btn-primary {
 	width: 100%;
 }
+
+/* Détail produit*/
+.post-comment button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+
+
+
+/* Compte client */
 
 .produit-list-compte-client p{
 	text-align: center;

@@ -9,13 +9,18 @@ import javax.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 
+import fr.jerep6.gruyere.persistance.bo.Commentaire;
 import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
 
 @Repository
+@Transactional(propagation = Propagation.REQUIRED)
 public class DaoProduit {
 
   private Logger LOGGER = LoggerFactory.getLogger(this.getClass());
@@ -56,6 +61,21 @@ public class DaoProduit {
     query.setParameter("PRD_ID", produitId);
 
     return query.getSingleResult();
+  }
+
+  public void posterQuestion(Utilisateur utilisateur, Integer produitId, String question) {
+    Preconditions.checkNotNull(utilisateur);
+    Preconditions.checkNotNull(produitId);
+    Preconditions.checkArgument(!Strings.isNullOrEmpty(question));
+
+    Commentaire com = new Commentaire();
+    com.setContenu(question);
+    com.setProduit(lire(produitId));
+    com.setUtilisateur(utilisateur);
+
+    em.persist(com);
+    em.flush();
+
   }
 
 }
