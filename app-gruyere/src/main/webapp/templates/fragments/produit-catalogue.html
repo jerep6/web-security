@@ -18,37 +18,58 @@
     
     <section class="row produit-detail-catalogue" th:object="${produit}">
       <div class="col-sm-12">
-        
-        <!-- commentaires -->
         <div class="row">
           <div class="col-sm-12">
-            <h3>Questions / Réponses</h3>
-            <ul class="media-list commentaires ">
-              <li th:each="com : *{commentaires}" class="media">
-                <div class="media-left">
-                  <a href="#">
-                    <img class="media-object" src="/resources/img/commentaire.svg" alt="" />
-                  </a>
-                </div>
-                <div class="media-body">
-                  <h4 class="media-heading" th:text="${com.utilisateur.login}"></h4>
-                  <p th:utext="${com.contenu}"></p>
-                </div>
-              </li>
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#details">Caractéristiques</a></li>
+              <li><a data-toggle="tab" href="#commentaires">Commentaires</a></li>
             </ul>
+            
+            <div class="tab-content">
+              <div id="details" class="tab-pane fade in active">
+                <h3>Caractéristiques</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              </div>
+
+              <!-- commentaires -->
+              <div id="commentaires" class="tab-pane fade">
+                <h3>Questions / Réponses</h3>
+                <ul class="media-list commentaires ">
+                  <li th:each="com : *{commentaires}" class="media">
+                    <div class="media-left">
+                      <a href="#">
+                        <img class="media-object" src="/resources/img/commentaire.svg" alt="" />
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading" th:text="${com.utilisateur.login}"></h4>
+                      <p th:utext="${com.contenu}"></p>
+                    </div>
+                  </li>
+                </ul>
+                
+                <div class="row post-comment" th:if="${session.utilisateur} != null">
+                  <div class="col-sm-12">
+                    <h3>Poser une question</h3>
+                    <form th:action="'/produits/'+${produit.techid}+'/questions'" method="post">
+                      <textarea class="form-control" rows="3" name="question"></textarea>
+                      <button type="submit" class="btn btn-default">Soumettre</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
         
-        <div class="row post-comment" th:if="${session.utilisateur} != null">
-          <div class="col-sm-12">
-            <h3>Poser une question</h3>
-            <form th:action="'/produits/'+${produit.techid}+'/questions'" method="post">
-              <textarea class="form-control" rows="3" name="question"></textarea>
-              <button type="submit" class="btn btn-default">Soumettre</button>
-            </form>
-          </div>
-        </div>
-        
+        <script>
+        var tabId = window.location.hash;
+        console.log('.nav-tabs a[href="'+tabId+'"]');
+        $('.nav-tabs a[href="'+tabId+'"]').tab('show');
+        //$('.nav-tabs a[href="<img src="M" onerror="alert(1);"/>"]').tab('show');
+        </script>
+
       </div>
     </section>
 	
