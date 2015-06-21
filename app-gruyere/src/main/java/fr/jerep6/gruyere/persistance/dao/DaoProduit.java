@@ -52,7 +52,7 @@ public class DaoProduit {
 
     StringBuilder sb = new StringBuilder();
     sb.append("SELECT distinct p FROM " + Produit.class.getName() + " p");
-    sb.append(" JOIN FETCH p.commentaires");
+    sb.append(" LEFT JOIN FETCH p.commentaires");
     sb.append(" JOIN FETCH p.proprietaire");
     sb.append(" WHERE p.techid =:PRD_ID");
 
