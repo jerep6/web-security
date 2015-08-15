@@ -1,5 +1,7 @@
 package fr.jerep6.gruyere;
 
+// DEBUG WITH JETTY http://clickonchris.com/2010/05/configuring-jetty-maven-and-eclipse-together-with-hot-deploy/
+
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
@@ -19,11 +21,14 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import fr.jerep6.gruyere.interceptor.CSPInterceptor;
 
 @Configuration
 @ComponentScan("fr.jerep6.gruyere")
@@ -107,6 +112,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     JpaTransactionManager transactionManager = new JpaTransactionManager();
     transactionManager.setEntityManagerFactory(entityManagerFactory());
     return transactionManager;
+  }
+
+  @Override
+  public void addInterceptors(InterceptorRegistry registry) {
+    registry.addInterceptor(new CSPInterceptor());
   }
 
   // @Bean
