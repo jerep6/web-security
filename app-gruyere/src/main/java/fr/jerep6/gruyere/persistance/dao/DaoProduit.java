@@ -1,9 +1,11 @@
 package fr.jerep6.gruyere.persistance.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import com.google.common.base.Strings;
 import fr.jerep6.gruyere.persistance.bo.Commentaire;
 import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
+import fr.jerep6.gruyere.transfert.ProduitDTO;
 
 @Repository
 @Transactional(propagation = Propagation.REQUIRED)
@@ -34,17 +37,22 @@ public class DaoProduit {
     return query.getResultList();
   }
 
-  public List<Produit> listerProduitUtilisateur(Utilisateur utilisateur) {
-    Preconditions.checkNotNull(utilisateur);
+  public List<ProduitDTO> listerProduitUtilisateur(String utilisateurId) {
+    // utilisateurId =
+    // "1' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png' FROM UTILISATEUR WHERE '1'='1";
+
+    Preconditions.checkNotNull(utilisateurId);
     StringBuilder sb = new StringBuilder();
-    sb.append("SELECT p FROM " + Produit.class.getName() + " p");
-    sb.append(" WHERE p.proprietaire.id =:UTI_ID");
+    sb.append("SELECT PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX, PRD_IMAGE FROM PRODUIT p");
+    sb.append(" WHERE UTI_ID ='" + utilisateurId + "'");
 
     LOGGER.debug("JPQL : {}", sb.toString());
-    TypedQuery<Produit> query = em.createQuery(sb.toString(), Produit.class);
-    query.setParameter("UTI_ID", utilisateur.getTechid());
+    Query query = em.createNativeQuery(sb.toString());
 
-    return query.getResultList();
+    List<ProduitDTO> produits = ((List<Object>) query.getResultList()).stream()
+        .map(this::mapProduit).collect(Collectors.toList());
+
+    return produits;
   }
 
   public Produit lire(Integer produitId) {
@@ -61,6 +69,18 @@ public class DaoProduit {
     query.setParameter("PRD_ID", produitId);
 
     return query.getSingleResult();
+  }
+
+  private ProduitDTO mapProduit(Object result) {
+    Object[] o = (Object[]) result;
+    ProduitDTO p = new ProduitDTO();
+
+    p.setTechid((Integer) o[0]);
+    p.setTitre((String) o[1]);
+    p.setDescription((String) o[2]);
+    p.setPrix(((Double) o[3]).toString());
+    p.setImage((String) o[4]);
+    return p;
   }
 
   public void posterQuestion(Utilisateur utilisateur, Integer produitId, String question) {

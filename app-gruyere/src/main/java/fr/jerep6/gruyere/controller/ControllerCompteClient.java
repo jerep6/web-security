@@ -20,6 +20,7 @@ import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
 import fr.jerep6.gruyere.persistance.dao.DaoProduit;
 import fr.jerep6.gruyere.persistance.dao.DaoUtilisateur;
+import fr.jerep6.gruyere.transfert.ProduitDTO;
 
 @Controller
 @SessionAttributes("utilisateur")
@@ -66,7 +67,7 @@ public class ControllerCompteClient {
   @RequestMapping(value = "/compte/produits", method = RequestMethod.GET)
   public String listerProduitUtilisateur(Model model,
       @ModelAttribute("utilisateur") Utilisateur utilisateur) {
-    List<Produit> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateur);
+    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateur.getTechid().toString());
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-compte-client");

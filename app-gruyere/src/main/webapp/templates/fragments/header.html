@@ -14,7 +14,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li><a th:href="@{/}" th:text="#{nav.elt1}">ELT1</a></li>
-            <li><a th:if="${session.utilisateur} != null" th:href="@{/compte/produits}" th:text="#{nav.elt2}">ELT2</a></li>
+            <li><a th:if="${session.utilisateur} != null" th:href="@{/compte/{utilisateurId}/produits(utilisateurId=${session.utilisateur.techid})}" th:text="#{nav.elt2}">ELT2</a></li>
           </ul>
 
             <ul class="nav navbar-nav navbar-right">
