@@ -9,16 +9,3 @@ Je vous propose de découvrir et d’exploiter les failles les plus communes, à
 Si vous souhaitez démystifier les termes XSS, CSRF, injection, sanitization ou encore CSP ce talk est fait pour vous !
 
 
-
-## Deploy to HEROKU
-
-Comme l'application n'est pas à la racine du répository il faut pusher sur Heroku seulement le dossier de l'application.
-  
-  git subtree push --prefix app-gruyere heroku master
-
-
-**Création de l'application Heroku**
-  
-  cd root_directory
-  heroku create securite-app-gruyere
-
