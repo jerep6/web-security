@@ -6,11 +6,14 @@
 	<section class="row produit-list produit-list-catalogue">
       <div th:each="prod : ${produits}" class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <img th:src="${prod.image}" alt="" />
+		  <a th:href="'/produits/'+${prod.techid}">
+            <img th:src="${prod.image}" alt="" />
+          </a>
           <div class="caption">
             <h3 th:text="${prod.titre}"></h3>
-            <p th:text="${prod.description}"></p>
-            <p><a th:href="'/produits/'+${prod.techid}" class="btn btn-primary" role="button">Acheter</a></p>
+			<p class="desc" th:text="${prod.description}"></p>
+            <p class="prix" th:text="${prod.prix}+€"></p>
+            <p><a th:href="'/produits/'+${prod.techid}" class="btn btn-primary" role="button">VOIR LA FICHE PRODUIT</a></p>
           </div>
         </div>
       </div>
@@ -21,14 +24,20 @@
         <div class="row">
           <div class="col-sm-12">
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#details">Caractéristiques</a></li>
+              <li class="active"><a data-toggle="tab" href="#details">Descriptif détaillé</a></li>
               <li><a data-toggle="tab" href="#commentaires">Commentaires</a></li>
             </ul>
             
             <div class="tab-content">
               <div id="details" class="tab-pane fade in active">
-                <h3>Caractéristiques</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h3 th:text="${produit.titre}"></h3>
+                <img th:src="${produit.image}" alt="" />
+                <div class="caption">
+	            	<p class="prix" th:text="${produit.prix}+€"></p>
+		            <p><a class="btn btn-primary" role="button">ACHETER</a></p>
+		            <span>Descriptif détaillé :</span>
+		            <p class="desc" th:text="${produit.description}"></p>
+	            </div>
               </div>
 
               <!-- commentaires -->

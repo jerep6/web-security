@@ -15,22 +15,95 @@ footer .footer-container {
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.33);
 }
 
-.produit-list img {
-	max-height: 200px;
-}
-
-
 /* Catalogue */
-.produit-list-catalogue .btn-primary {
-	width: 100%;
+.produit-list img {
+	max-height: 220px;
 }
 
-/* Détail produit*/
+.produit-list-catalogue .caption {
+  padding: 9px 9px 0 9px;
+}
+
+.produit-list-catalogue .caption h3 {
+  margin-top:5px;
+  height: 80px; /*hauteur fixe a remplacer par du natif bootsrap */
+}
+
+.produit-list-catalogue .caption p, .produit-detail-catalogue p {
+  text-align: justify;
+}
+
+.produit-list-catalogue .caption p.desc{
+  height: 200px; /*hauteur fixe a remplacer par du natif bootsrap */
+  overflow: hidden;
+}
+
+.produit-list-catalogue .caption .prix, 
+.produit-detail-catalogue .prix {
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+.produit-list-catalogue .btn-primary, .produit-detail-catalogue .btn-primary {
+  width: 100%;
+  background-color: #9e9e94;
+  border-color: #646454;
+  font-size: 15px;
+}
+
+.produit-list-catalogue .btn-primary:hover,
+.produit-list-catalogue .btn-primary:focus,
+.produit-list-catalogue .btn-primary.focus,
+.produit-list-catalogue .btn-primary:active,
+.produit-list-catalogue .btn-primary.active,
+.produit-list-catalogue .open > .dropdown-toggle.btn-primary, 
+.produit-detail-catalogue .btn-primary:hover,
+.produit-detail-catalogue .btn-primary:focus,
+.produit-detail-catalogue .btn-primary.focus,
+.produit-detail-catalogue .btn-primary:active,
+.produit-detail-catalogue .btn-primary.active,
+.produit-detail-catalogue .open > .dropdown-toggle.btn-primary {
+  background-color: #7E7E76;
+  border-color: #646454;
+}
+
+
+
+
+/* Detail produit descriptif */
+.produit-detail-catalogue img {
+  float: left;
+  padding: 0 30px 0 10px;
+  width: 50%;
+  max-width: 360px;
+}
+
+.produit-detail-catalogue div.caption {
+  margin-left:370px;
+}
+
+.produit-detail-catalogue span {
+  font-weight: bold;
+}
+
+.produit-detail-catalogue .prix {
+  font-size: 40px;
+  padding-top: 45px;
+}
+
+.produit-detail-catalogue .btn {
+  font-size: 20px;
+  margin: 25px 0 40px 0;
+}
+
+
+/* Detail produit commentaires */
 .post-comment button {
   width: 100%;
   margin-top: 10px;
 }
-
 
 
 
@@ -45,4 +118,19 @@ footer .footer-container {
   margin-top:20px;
   display: block;
   width: 80%;
+}
+
+
+/* columns of same height styles */
+
+.row-height {
+  display: table;
+  table-layout: fixed;
+  height: 100%;
+  width: 100%;
+}
+.col-height {
+  display: table-cell;
+  float: none;
+  height: 100%;
 }
