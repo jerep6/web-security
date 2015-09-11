@@ -1,0 +1,20 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<body>
+    
+    <section class="row failles-connues">
+      <div class="col-sm-12">
+        <h1>Failles connues</h1>
+        <ul>
+          <li>Injection SQL sur le login : possibilité de se logguer sans connaitre le mot de passe</li>
+          <li>Injection SQL sur la liste des commentaires</li>
+          <li>Compte client : aucune vérification de l'appartenance du produit au client. Possibilité de modifier un produit qui n'est 
+            pas le sien en devinant l'identifiant dans l'url</li>
+        </ul>
+      </div>
+    </section>
+    
+	
+</body>
+</html>

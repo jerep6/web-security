@@ -16,3 +16,6 @@ VALUES (668, 'Pokemon Florizarre', 'Florizarre qui fouette avec ses liannes', 8.
 
 INSERT INTO COMMENTAIRE (COM_ID, COM_CONTENU, PRD_ID, UTI_ID) 
 VALUES (1, 'Le pikachu est-il fournit avec les piles ?', 666, 1);
+
+
+-- commentaire avec accent éééààà
