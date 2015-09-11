@@ -26,7 +26,7 @@ footer .footer-container {
 
 .produit-list-catalogue .caption h3 {
   margin-top:5px;
-  height: 80px; /*hauteur fixe a remplacer par du natif bootsrap */
+  height: 75px; /*hauteur fixe a remplacer par du natif bootsrap */
 }
 
 .produit-list-catalogue .caption p, .produit-detail-catalogue p {
@@ -34,7 +34,7 @@ footer .footer-container {
 }
 
 .produit-list-catalogue .caption p.desc{
-  height: 200px; /*hauteur fixe a remplacer par du natif bootsrap */
+  height: 177px; /*hauteur fixe a remplacer par du natif bootsrap */
   overflow: hidden;
 }
 
