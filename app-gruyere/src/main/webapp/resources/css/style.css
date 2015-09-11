@@ -21,7 +21,7 @@ footer .footer-container {
 }
 
 .produit-list-catalogue .caption {
-  padding: 9px 9px 0 9px;
+  padding: 9px 5px 0;
 }
 
 .produit-list-catalogue .caption h3 {
@@ -34,7 +34,7 @@ footer .footer-container {
 }
 
 .produit-list-catalogue .caption p.desc{
-  height: 177px; /*hauteur fixe a remplacer par du natif bootsrap */
+  height: 160px; /*hauteur fixe a remplacer par du natif bootsrap */
   overflow: hidden;
 }
 
