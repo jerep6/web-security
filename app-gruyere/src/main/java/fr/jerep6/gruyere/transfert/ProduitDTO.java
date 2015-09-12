@@ -15,14 +15,6 @@ public class ProduitDTO {
 
   private List<CommentaireDTO> commentaires = new ArrayList<>();
 
-  public List<CommentaireDTO> getCommentaires() {
-    return commentaires;
-  }
-
-  public void setCommentaires(List<CommentaireDTO> commentaires) {
-    this.commentaires = commentaires;
-  }
-
   public ProduitDTO() {}
 
   public ProduitDTO(Integer techid, String titre, String description, Float prix, String image,
@@ -36,6 +28,35 @@ public class ProduitDTO {
     this.categorie = categorie;
     this.utilisateurId = utilisateurId;
     this.utilisateurLogin = utilisateurLogin;
+  }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + ((techid == null) ? 0 : techid.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null) return false;
+    if (getClass() != obj.getClass()) return false;
+    ProduitDTO other = (ProduitDTO) obj;
+    if (techid == null) {
+      if (other.techid != null) return false;
+    }
+    else if (!techid.equals(other.techid)) return false;
+    return true;
+  }
+
+  public List<CommentaireDTO> getCommentaires() {
+    return commentaires;
+  }
+
+  public void setCommentaires(List<CommentaireDTO> commentaires) {
+    this.commentaires = commentaires;
   }
 
   public String getCategorie() {
