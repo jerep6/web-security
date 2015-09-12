@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
 import fr.jerep6.gruyere.persistance.dao.DaoProduit;
 import fr.jerep6.gruyere.persistance.dao.DaoUtilisateur;
@@ -67,7 +66,8 @@ public class ControllerCompteClient {
   @RequestMapping(value = "/compte/produits", method = RequestMethod.GET)
   public String listerProduitUtilisateur(Model model,
       @ModelAttribute("utilisateur") Utilisateur utilisateur) {
-    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateur.getTechid().toString());
+    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateur
+        .getTechid());
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-compte-client");
@@ -82,7 +82,7 @@ public class ControllerCompteClient {
   public String modifierProduit(Model model, @PathVariable("produit_id") Integer produitId,
       @ModelAttribute("utilisateur") Utilisateur utilisateur) {
 
-    Produit produit = daoProduit.lire(produitId);
+    ProduitDTO produit = daoProduit.lire(produitId);
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-compte-client");

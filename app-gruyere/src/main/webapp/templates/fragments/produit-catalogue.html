@@ -23,26 +23,24 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-12">
-            <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#details">Descriptif détaillé</a></li>
-              <li><a data-toggle="tab" href="#commentaires">Commentaires</a></li>
-            </ul>
             
-            <div class="tab-content">
-              <div id="details" class="tab-pane fade in active">
+              <div class="descriptif">
                 <h3 th:text="${produit.titre}"></h3>
                 <img th:src="${produit.image}" alt="" />
                 <div class="caption">
 	            	<p class="prix" th:text="${produit.prix}+€"></p>
 		            <p><a class="btn btn-primary" role="button">ACHETER</a></p>
-		            <span>Descriptif détaillé :</span>
+		            <strong>Descriptif détaillé :</strong>
 		            <p class="desc" th:text="${produit.description}"></p>
+                
+                    <strong>Catégorie :</strong> <a th:href="@{/produits?u={utilisateurId}(utilisateurId=${produit.categorie})}" th:text="${produit.categorie}"></a>
+            
 	            </div>
               </div>
 
-              <!-- commentaires -->
-              <div id="commentaires" class="tab-pane fade">
+              <div class="question">
                 <h3>Questions / Réponses</h3>
+                
                 <ul class="media-list commentaires ">
                   <li th:each="com : *{commentaires}" class="media">
                     <div class="media-left">
@@ -51,7 +49,7 @@
                       </a>
                     </div>
                     <div class="media-body">
-                      <h4 class="media-heading" th:text="${com.utilisateur.login}"></h4>
+                      <h4 class="media-heading" th:text="${com.utilisateurLogin}"></h4>
                       <p th:utext="${com.contenu}"></p>
                     </div>
                   </li>
@@ -67,7 +65,6 @@
                   </div>
                 </div>
               </div>
-            </div>
             
           </div>
         </div>

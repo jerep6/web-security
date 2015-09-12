@@ -31,10 +31,13 @@ public class Produit {
   private String description;
 
   @Column(name = "PRD_PRIX", nullable = false)
-  private String prix;
+  private Float prix;
 
   @Column(name = "PRD_IMAGE", nullable = false)
   private String image;
+
+  @Column(name = "PRD_CATEGORIE", nullable = false)
+  private String categorie;
 
   @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
   @OrderBy("techid ASC")
@@ -72,11 +75,11 @@ public class Produit {
     this.description = description;
   }
 
-  public String getPrix() {
+  public Float getPrix() {
     return prix;
   }
 
-  public void setPrix(String prix) {
+  public void setPrix(Float prix) {
     this.prix = prix;
   }
 
@@ -98,6 +101,14 @@ public class Produit {
 
   public void setTitre(String titre) {
     this.titre = titre;
+  }
+
+  public String getCategorie() {
+    return categorie;
+  }
+
+  public void setCategorie(String categorie) {
+    this.categorie = categorie;
   }
 
   @Override

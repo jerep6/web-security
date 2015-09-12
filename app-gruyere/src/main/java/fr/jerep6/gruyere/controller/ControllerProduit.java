@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
 import fr.jerep6.gruyere.persistance.dao.DaoProduit;
+import fr.jerep6.gruyere.transfert.CommentaireDTO;
 import fr.jerep6.gruyere.transfert.ProduitDTO;
 
 @Controller
@@ -28,7 +28,7 @@ public class ControllerProduit {
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String index(Model model) {
 
-    List<Produit> produits = daoProduit.listerTousLesProduits();
+    List<ProduitDTO> produits = daoProduit.listerTousLesProduits();
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-catalogue");
@@ -41,7 +41,9 @@ public class ControllerProduit {
   @RequestMapping(value = "/produits/{produit_id}", method = RequestMethod.GET)
   public String lire(Model model, @PathVariable("produit_id") Integer produitId) {
 
-    Produit produit = daoProduit.lire(produitId);
+    ProduitDTO produit = daoProduit.lire(produitId);
+    List<CommentaireDTO> commentaires = daoProduit.lireCommentaires(produitId);
+    produit.setCommentaires(commentaires);
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-catalogue");
@@ -54,7 +56,7 @@ public class ControllerProduit {
 
   @RequestMapping(value = "/produits", method = RequestMethod.GET)
   public String listerProduitUtilisateur(Model model, @RequestParam("u") String utilisateurId) {
-    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitUtilisateur(utilisateurId);
+    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitCategorie(utilisateurId);
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-catalogue");

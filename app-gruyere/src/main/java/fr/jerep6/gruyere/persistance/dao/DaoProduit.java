@@ -20,6 +20,7 @@ import com.google.common.base.Strings;
 import fr.jerep6.gruyere.persistance.bo.Commentaire;
 import fr.jerep6.gruyere.persistance.bo.Produit;
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
+import fr.jerep6.gruyere.transfert.CommentaireDTO;
 import fr.jerep6.gruyere.transfert.ProduitDTO;
 
 @Repository
@@ -31,20 +32,20 @@ public class DaoProduit {
   @PersistenceContext
   private EntityManager em;
 
-  public List<Produit> listerTousLesProduits() {
-    TypedQuery<Produit> query = em.createQuery("SELECT p FROM " + Produit.class.getName() + " p",
-        Produit.class);
-    return query.getResultList();
+  public List<ProduitDTO> listerTousLesProduits() {
+    return listerProduitCategorie(null);
   }
 
-  public List<ProduitDTO> listerProduitUtilisateur(String utilisateurId) {
+  public List<ProduitDTO> listerProduitCategorie(String categorieName) {
     // utilisateurId =
     // "1' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png' FROM UTILISATEUR WHERE '1'='1";
 
-    Preconditions.checkNotNull(utilisateurId);
     StringBuilder sb = new StringBuilder();
-    sb.append("SELECT PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX, PRD_IMAGE FROM PRODUIT p");
-    sb.append(" WHERE UTI_ID ='" + utilisateurId + "'");
+    sb.append("SELECT PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX, PRD_IMAGE, PRD_CATEGORIE, U.UTI_ID, u.UTI_LOGIN FROM PRODUIT p");
+    sb.append(" JOIN UTILISATEUR u ON u.UTI_ID = p.UTI_ID");
+    if (!Strings.isNullOrEmpty(categorieName)) {
+      sb.append(" WHERE PRD_CATEGORIE ='" + categorieName + "'");
+    }
 
     LOGGER.debug("JPQL : {}", sb.toString());
     Query query = em.createNativeQuery(sb.toString());
@@ -55,20 +56,63 @@ public class DaoProduit {
     return produits;
   }
 
-  public Produit lire(Integer produitId) {
-    Preconditions.checkNotNull(produitId);
-
+  public List<ProduitDTO> listerProduitUtilisateur(Integer utilisateurId) {
     StringBuilder sb = new StringBuilder();
-    sb.append("SELECT distinct p FROM " + Produit.class.getName() + " p");
-    sb.append(" LEFT JOIN FETCH p.commentaires");
-    sb.append(" JOIN FETCH p.proprietaire");
-    sb.append(" WHERE p.techid =:PRD_ID");
+    sb.append("SELECT PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX, PRD_IMAGE, PRD_CATEGORIE, U.UTI_ID, u.UTI_LOGIN FROM PRODUIT p");
+    sb.append(" JOIN UTILISATEUR u ON u.UTI_ID = p.UTI_ID");
+    if (utilisateurId != null) {
+      sb.append(" WHERE u.UTI_ID ='" + utilisateurId + "'");
+    }
 
     LOGGER.debug("JPQL : {}", sb.toString());
-    TypedQuery<Produit> query = em.createQuery(sb.toString(), Produit.class);
-    query.setParameter("PRD_ID", produitId);
+    Query query = em.createNativeQuery(sb.toString());
 
-    return query.getSingleResult();
+    List<ProduitDTO> produits = ((List<Object>) query.getResultList()).stream()
+        .map(this::mapProduit).collect(Collectors.toList());
+
+    return produits;
+  }
+
+  public ProduitDTO lire(Integer produitId) {
+    Preconditions.checkNotNull(produitId);
+
+    StringBuilder produit = new StringBuilder();
+    produit.append("SELECT  new " + ProduitDTO.class.getName());
+    produit
+        .append("(p.techid, p.titre, p.description, p.prix, p.image, p.categorie, u.techid, u.login)");
+    produit.append(" FROM " + Produit.class.getName() + " p");
+    produit.append(" LEFT JOIN p.commentaires");
+    produit.append(" JOIN p.proprietaire u");
+    produit.append(" WHERE p.techid =:PRD_ID");
+
+    StringBuilder commentaires = new StringBuilder();
+    commentaires.append("SELECT  new " + CommentaireDTO.class.getName());
+    commentaires.append("(c.techid, p.contenu, u.techid, u.login)");
+    commentaires.append(" FROM " + Commentaire.class.getName() + " p");
+    commentaires.append(" JOIN p.utilisateur u");
+    commentaires.append(" WHERE c.produit.techid =:PRD_ID");
+
+    LOGGER.debug("JPQL : {}", produit.toString());
+    TypedQuery<ProduitDTO> queryProduit = em.createQuery(produit.toString(), ProduitDTO.class);
+    queryProduit.setParameter("PRD_ID", produitId);
+    return queryProduit.getSingleResult();
+  }
+
+  public List<CommentaireDTO> lireCommentaires(Integer produitId) {
+    Preconditions.checkNotNull(produitId);
+
+    StringBuilder commentaires = new StringBuilder();
+    commentaires.append("SELECT  new " + CommentaireDTO.class.getName());
+    commentaires.append("(c.techid, c.contenu, u.techid, u.login)");
+    commentaires.append(" FROM " + Commentaire.class.getName() + " c");
+    commentaires.append(" JOIN c.utilisateur u");
+    commentaires.append(" WHERE c.produit.techid =:PRD_ID");
+
+    LOGGER.debug("JPQL : {}", commentaires.toString());
+    TypedQuery<CommentaireDTO> queryProduit = em.createQuery(commentaires.toString(),
+        CommentaireDTO.class);
+    queryProduit.setParameter("PRD_ID", produitId);
+    return queryProduit.getResultList();
   }
 
   private ProduitDTO mapProduit(Object result) {
@@ -80,6 +124,9 @@ public class DaoProduit {
     p.setDescription((String) o[2]);
     p.setPrix(((Double) o[3]).toString());
     p.setImage((String) o[4]);
+    p.setCategorie((String) o[5]);
+    p.setUtilisateurId((Integer) o[6]);
+    p.setUtilisateurLogin((String) o[7]);
     return p;
   }
 
@@ -90,12 +137,11 @@ public class DaoProduit {
 
     Commentaire com = new Commentaire();
     com.setContenu(question);
-    com.setProduit(lire(produitId));
+    com.setProduit(em.find(Produit.class, produitId));
     com.setUtilisateur(utilisateur);
 
     em.persist(com);
     em.flush();
-
   }
 
 }
