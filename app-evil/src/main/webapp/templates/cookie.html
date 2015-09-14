@@ -52,6 +52,10 @@
         </div>
       </div>
     </div>
+    
+    <div class="row" th:if="${cookies.size()} > 0">
+      <a href="/clear" class="btn btn-danger col-sm-12">Clear</a>
+    </div>
   </div>
 </body>
 </html>

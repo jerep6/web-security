@@ -40,11 +40,8 @@ public class ControllerCookie {
   }
 
   @RequestMapping(value = "/clear", method = RequestMethod.GET)
-  public @ResponseBody HashMap<String, String> clear(Model model) {
+  public String clear(Model model) {
     cookies.clear();
-
-    HashMap<String, String> hashMap = new HashMap<String, String>();
-    hashMap.put("result", "clear success");
-    return hashMap;
+    return "redirect:/";
   }
 }
