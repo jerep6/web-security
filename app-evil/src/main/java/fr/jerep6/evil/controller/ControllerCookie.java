@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Lists;
+
 import fr.jerep6.evil.model.EvilCookie;
 
 @Controller
@@ -21,7 +23,7 @@ public class ControllerCookie {
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String index(Model model) {
 
-    model.addAttribute("cookies", cookies);
+    model.addAttribute("cookies", Lists.reverse(cookies));
     return "cookie";
   }
 

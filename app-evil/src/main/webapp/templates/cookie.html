@@ -17,17 +17,41 @@
 
 
 </head>
-<body>
+<body class="cookies">
   <div class="container">
 
-    <div th:each="evilCookie : ${cookies}" class="col-sm-12">
-      <span th:text="${evilCookie.formatedDate}"></span>
-      <ul th:each="c : ${evilCookie.cookies}">
-        <li><span th:text="${c.name}"></span> <span th:text="${c.value}"></span></li>
-      </ul>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default" th:each="evilCookie : ${cookies}" >
+          <div class="panel-heading">
+            <h3 class="panel-title" th:text="${evilCookie.formatedDate}"></h3>
+          </div>
+          <div class="panel-body">
+            <table class="table-cookies">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Valeur</th>
+                  <th>Code</th>
+                </tr>
+              </thead>
+              
+              
+              <tbody>
+                <tr th:each="c : ${evilCookie.cookies}">
+                  <td th:text="${c.name}"></td>
+                  <td th:text="${c.value}"></td>
+                  <td>
+                    document.cookie="<span th:text="${c.name}"></span>=<span th:text="${c.value}"></span>"
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-
-
   </div>
 </body>
 </html>
