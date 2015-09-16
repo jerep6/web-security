@@ -137,3 +137,23 @@ footer .footer-container {
   float: none;
   height: 100%;
 }
+
+
+/* failles.html */
+
+.hint .hint-title {
+  display: inline-block;
+  font-weight: bold;
+  vertical-align: top;
+}
+.hint .hint-content {
+  display: inline-block;
+}
+.hint .hint-closed {
+  cursor: pointer;
+}
+
+
+
+
+.nodisplay { display: none !important; }
