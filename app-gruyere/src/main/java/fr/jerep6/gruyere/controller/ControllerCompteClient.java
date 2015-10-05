@@ -31,14 +31,18 @@ public class ControllerCompteClient {
 
   @Autowired
   private DaoProduit daoProduit;
+  
+  // Url de redirection
+  private String urlCibleRedirect = null;
 
   @RequestMapping(value = "/authentification", method = RequestMethod.GET)
-  public String index(Model model) {
+  public String index(Model model, @RequestParam (required=false) String urlCible) {
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/authentification");
     tplMiddle.put("frg", ".authentification");
     model.addAttribute("tpl_middle", tplMiddle);
+	urlCibleRedirect = urlCible;
     return "index";
   }
 
@@ -51,6 +55,9 @@ public class ControllerCompteClient {
       LOGGER.warn("Login fail");
       return "redirect:/authentification";
     }
+	else if (urlCibleRedirect != null){
+		return "redirect:" + urlCibleRedirect;
+	}
     else {
       model.addAttribute("utilisateur", utilisateur);
       Map<String, String> tplMiddle = new HashMap<>();
