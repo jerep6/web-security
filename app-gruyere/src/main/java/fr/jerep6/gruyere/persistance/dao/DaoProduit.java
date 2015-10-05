@@ -38,7 +38,7 @@ public class DaoProduit {
 
   public List<ProduitDTO> listerProduitCategorie(String categorieName) {
     // utilisateurId =
-    // "1' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png' FROM UTILISATEUR WHERE '1'='1";
+    // "bijou' UNION SELECT UTI_ID, UTI_LOGIN, UTI_PWD, 1.0, '/resources/img/pirate.png', 'hack', UTI_ID, UTI_LOGIN FROM UTILISATEUR WHERE '1'='1";
 
     StringBuilder sb = new StringBuilder();
     sb.append("SELECT PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX, PRD_IMAGE, PRD_CATEGORIE, U.UTI_ID, u.UTI_LOGIN FROM PRODUIT p");
@@ -77,20 +77,12 @@ public class DaoProduit {
     Preconditions.checkNotNull(produitId);
 
     StringBuilder produit = new StringBuilder();
-    produit.append("SELECT  new " + ProduitDTO.class.getName());
+    produit.append("SELECT distinct new " + ProduitDTO.class.getName());
     produit
         .append("(p.techid, p.titre, p.description, p.prix, p.image, p.categorie, u.techid, u.login)");
     produit.append(" FROM " + Produit.class.getName() + " p");
-    produit.append(" LEFT JOIN p.commentaires");
     produit.append(" JOIN p.proprietaire u");
     produit.append(" WHERE p.techid =:PRD_ID");
-
-    StringBuilder commentaires = new StringBuilder();
-    commentaires.append("SELECT  new " + CommentaireDTO.class.getName());
-    commentaires.append("(c.techid, p.contenu, u.techid, u.login)");
-    commentaires.append(" FROM " + Commentaire.class.getName() + " p");
-    commentaires.append(" JOIN p.utilisateur u");
-    commentaires.append(" WHERE c.produit.techid =:PRD_ID");
 
     LOGGER.debug("JPQL : {}", produit.toString());
     TypedQuery<ProduitDTO> queryProduit = em.createQuery(produit.toString(), ProduitDTO.class);

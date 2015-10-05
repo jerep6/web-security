@@ -1,0 +1,31 @@
+.cookies {
+  background-color: black;
+}
+
+.cookies .panel .panel-heading {
+  background-color: black;
+  color: #0DFF0D;
+}
+.cookies .panel .panel-body {
+  background-color: gray;
+  color: #EEF0EE;
+}
+.cookies .table-cookies {
+  width: 100%;
+}
+.cookies .table-cookies thead{
+  background-color: black;
+}
+.cookies .table-cookies td {
+  border: 01px solid green;
+}
+.cookies .table-cookies tr:hover {
+  background-color: #0C640B;
+}
+
+@media (min-width: 1200px) {
+  .cookies .container{
+      max-width: 800px;
+  }
+}
+

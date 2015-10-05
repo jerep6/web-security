@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Evil cookies</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link rel="stylesheet" type="text/css" media="all"
+  th:href="@{/resources/css/bootstrap.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+  th:href="@{/resources/css/style.css}" />
+
+<script th:src="@{/resources/js/jquery.min.js}" />
+<script th:src="@{/resources/js/bootstrap.min.js}" />
+
+
+</head>
+<body class="cookies">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-default" th:each="evilCookie : ${cookies}" >
+          <div class="panel-heading">
+            <h3 class="panel-title" th:text="${evilCookie.formatedDate}"></h3>
+          </div>
+          <div class="panel-body">
+            <table class="table-cookies">
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Valeur</th>
+                  <th>Code</th>
+                </tr>
+              </thead>
+              
+              
+              <tbody>
+                <tr th:each="c : ${evilCookie.cookies}">
+                  <td th:text="${c.name}"></td>
+                  <td th:text="${c.value}"></td>
+                  <td>
+                    document.cookie="<span th:text="${c.name}"></span>=<span th:text="${c.value}"></span>"
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row" th:if="${cookies.size()} > 0">
+      <a href="/clear" class="btn btn-danger col-sm-12">Clear</a>
+    </div>
+  </div>
+</body>
+</html>
