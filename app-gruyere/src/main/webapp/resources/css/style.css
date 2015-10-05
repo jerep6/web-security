@@ -17,6 +17,10 @@ footer .footer-container {
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.33);
 }
 
+.nav > i > a {
+	text-transform:capitalize;
+}
+
 /* Catalogue */
 .produit-list img {
 	max-height: 180px;
