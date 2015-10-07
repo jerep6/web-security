@@ -1,6 +1,7 @@
 @media (min-width: 1200px) {
   .container{
       max-width: 800px;
+	  position: relative;
   }
 }
 
@@ -17,7 +18,7 @@ footer .footer-container {
 	box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.33);
 }
 
-.nav > i > a {
+.nav > li > a {
 	text-transform:capitalize;
 }
 
@@ -155,6 +156,14 @@ footer .footer-container {
 }
 .hint .hint-closed {
   cursor: pointer;
+}
+
+
+/* user connecté */
+.user_connected {
+  width: 120px;
+  position: absolute;
+  right: -120px;
 }
 
 
