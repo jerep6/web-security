@@ -159,11 +159,16 @@ footer .footer-container {
 }
 
 
-/* user connecté */
-.user_connected {
-  width: 120px;
+/* avatar user connecté */
+.user_connecte_ban {
   position: absolute;
+  width: 120px;
   right: -120px;
+}
+
+.user_connecte_ban {
+  position: fixed;
+  width: 120px;
 }
 
 

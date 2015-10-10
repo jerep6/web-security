@@ -36,13 +36,11 @@ var cookiesSite = {
     },
     /* Delete du user avatar courant dans le cookie */
     deleteUserAvatarCourant : function() {
-    	console.log(document.cookie);
         $.cookie(this.COOKIE_NAME_USER_AVATAR, null, {
             path : '/',
             domain : "localhost",
             secure : false,
             expires : -1
         });
-        console.log(document.cookie);
     }
 };
