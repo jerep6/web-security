@@ -1,5 +1,3 @@
-var user_connected = 1; //1 - Alice, 2-Oscar 
-
 $(document)
     .ready(
         function() {
@@ -14,23 +12,49 @@ $(document)
                 $(this).parents(".hint").find(".hint-content").toggleClass(
                     "nodisplay");
               });
-
+		  chargerUserEnSession();
         });
 		
 		
-function changeUser(){
-	if (user_connected == 1){
+// Charger utilisateur en session
+function chargerUserEnSession(){
+	if (cookiesSite.getUserAvatarCourant() == "oscar"){
 		// Connection en tant qu'Oscar
-		$(".user_connected").attr("src", "/resources/img/users/oscar.png");
-		user_connected = 2;
-		$(".container").css("backgroundColor", "#f3f3f3");
-	}
-	else if (user_connected == 2){
+		chargerUserOscar();
+	} else if(cookiesSite.getUserAvatarCourant() == "alice"){
 		// Connection en tant qu'Alice
-		$(".user_connected").attr("src", "/resources/img/users/alice.png");
-		user_connected = 1;
-		$(".container").css("backgroundColor", "#fff8f5");
+		chargerUserAlice();
+	} else {
+		// Pas de cookie. Connection en tant qu'Oscar
+		chargerUserOscar();
 	}
-//a propager sur toutes les pages
-//TODO deconnexion & changement d'image
+}
+
+// Changer d'utilisateur
+function changerUser(){
+	// Deconnexion
+	if (cookiesSite.getUserAvatarCourant() == "oscar"){
+		document.cookie = 'JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		// Connection en tant qu'Alice
+		chargerUserAlice();
+	}
+	else if (cookiesSite.getUserAvatarCourant() == "alice"){
+		document.cookie = 'JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+		// Connection en tant qu'Oscar
+		chargerUserOscar();
+	}
+}
+	
+// Charger la connection en tant qu'Oscar
+function chargerUserOscar(){
+	$(".user_connected").attr("src", "/resources/img/users/oscar.png");
+	//$(".container").css("backgroundColor", "#259325");
+	cookiesSite.saveUserAvatarOscarCourant("oscar");
+}
+
+// Charger la connection en tant qu'Alice
+function chargerUserAlice(){
+	$(".user_connected").attr("src", "/resources/img/users/alice.png");
+	//$(".container").css("backgroundColor", "#FF4791");
+	cookiesSite.saveUserAvatarOscarCourant("alice");
 }
