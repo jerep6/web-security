@@ -160,13 +160,13 @@ footer .footer-container {
 
 
 /* avatar user connecté */
-.user_connecte_ban {
+.user_connected_ban {
   position: absolute;
   width: 120px;
   right: -120px;
 }
 
-.user_connecte_ban {
+.user_connected_ban {
   position: fixed;
   width: 120px;
 }
