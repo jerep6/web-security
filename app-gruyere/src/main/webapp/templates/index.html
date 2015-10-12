@@ -19,8 +19,10 @@
 </head>
 <body>
 	<div class="container">
-     <img class="user_connected" src="/resources/img/users/oscar.png" alt="changer d'utilisateur" onclick="javascript:changerUser();"/>
-  	 <header th:replace="fragments/header :: header"></header> 
+	 <div class="user_connected_ban">
+		<img class="user_connected" src="/resources/img/users/oscar.png" alt="changer d'utilisateur"/>
+  	 </div>
+	 <header th:replace="fragments/header :: header"></header> 
      <div th:replace="${tpl_middle.html} :: ${tpl_middle.frg}"></div>
   	 <footer th:replace="fragments/footer :: footer"></footer>
 	</div>
