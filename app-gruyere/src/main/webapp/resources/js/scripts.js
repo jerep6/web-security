@@ -1,3 +1,5 @@
+//"oscar" - Oscar, "alice" - Alice 
+
 $(document)
     .ready(
         function() {
@@ -12,16 +14,19 @@ $(document)
                 $(this).parents(".hint").find(".hint-content").toggleClass(
                     "nodisplay");
               });
-		  chargerUserEnSession();
+          chargerUserEnSession();
+          $(document).on("click", ".user_connected_ban img", function() {
+        	  changerUser();
+          });
         });
-		
-		
+
+
 // Charger utilisateur en session
 function chargerUserEnSession(){
-	if (cookiesSite.getUserAvatarCourant() == "oscar"){
+	if ($.cookie("USER") == "oscar"){
 		// Connection en tant qu'Oscar
 		chargerUserOscar();
-	} else if(cookiesSite.getUserAvatarCourant() == "alice"){
+	} else if($.cookie("USER") == "alice"){
 		// Connection en tant qu'Alice
 		chargerUserAlice();
 	} else {
@@ -33,13 +38,12 @@ function chargerUserEnSession(){
 // Changer d'utilisateur
 function changerUser(){
 	// Deconnexion
-	if (cookiesSite.getUserAvatarCourant() == "oscar"){
-		document.cookie = 'JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	$.cookie("JSESSIONID", null, {path : '/'});
+	if ($.cookie("USER") == "oscar"){
 		// Connection en tant qu'Alice
 		chargerUserAlice();
 	}
-	else if (cookiesSite.getUserAvatarCourant() == "alice"){
-		document.cookie = 'JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	else if ($.cookie("USER") == "alice"){
 		// Connection en tant qu'Oscar
 		chargerUserOscar();
 	}
@@ -48,13 +52,13 @@ function changerUser(){
 // Charger la connection en tant qu'Oscar
 function chargerUserOscar(){
 	$(".user_connected").attr("src", "/resources/img/users/oscar.png");
-	//$(".container").css("backgroundColor", "#259325");
-	cookiesSite.saveUserAvatarOscarCourant("oscar");
+	$(".container").css("backgroundColor", "#259325");
+	$.cookie("USER", "oscar", {path : '/', expires : 365});
 }
 
 // Charger la connection en tant qu'Alice
 function chargerUserAlice(){
 	$(".user_connected").attr("src", "/resources/img/users/alice.png");
-	//$(".container").css("backgroundColor", "#FF4791");
-	cookiesSite.saveUserAvatarOscarCourant("alice");
+	$(".container").css("backgroundColor", "#FF4791");
+	$.cookie("USER", "alice", {path : '/', expires : 365});	
 }
