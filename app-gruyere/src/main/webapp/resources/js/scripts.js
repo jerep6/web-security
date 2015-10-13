@@ -50,7 +50,7 @@ function changerUser() {
 // Charger la connection en tant qu'Oscar
 function chargerUserOscar() {
   $(".user_connected").attr("src", "/resources/img/users/oscar.png");
-  $(".container").css("backgroundColor", "#259325");
+  // $(".container").css("backgroundColor", "#259325");
   $.cookie("USER", "oscar", {
     path : '/',
     expires : 365
@@ -60,7 +60,7 @@ function chargerUserOscar() {
 // Charger la connection en tant qu'Alice
 function chargerUserAlice() {
   $(".user_connected").attr("src", "/resources/img/users/alice.png");
-  $(".container").css("backgroundColor", "#FF4791");
+  // $(".container").css("backgroundColor", "#FF4791");
   $.cookie("USER", "alice", {
     path : '/',
     expires : 365
