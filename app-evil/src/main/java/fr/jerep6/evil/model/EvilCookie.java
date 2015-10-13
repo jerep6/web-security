@@ -8,17 +8,20 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
 
+import com.google.common.base.Strings;
+
 public class EvilCookie {
   private Date date = new Date();
   private List<Cookie> cookies;
 
   public EvilCookie(String rawCookies) {
+    rawCookies = !Strings.isNullOrEmpty(rawCookies) ? rawCookies : "";
 
-    cookies = Arrays.asList(rawCookies.split("; ")).stream().map(c -> {
-      String[] s = c.split("=");
-      return new Cookie(s[0], s[1]);
-    }).collect(Collectors.toList());
-
+    cookies = Arrays.asList(rawCookies.split("; ")).stream()//
+        .filter(c -> !Strings.isNullOrEmpty(c)).map(c -> {
+          String[] s = c.split("=");
+          return new Cookie(s[0], s[1]);
+        }).collect(Collectors.toList());
   }
 
   public String getFormatedDate() {
