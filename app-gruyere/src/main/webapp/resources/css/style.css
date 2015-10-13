@@ -169,6 +169,7 @@ footer .footer-container {
 .user_connected {
   position: fixed;
   width: 120px;
+  cursor: pointer;
 }
 
 

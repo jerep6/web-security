@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.google.common.base.Strings;
+
 import fr.jerep6.gruyere.persistance.bo.Utilisateur;
 import fr.jerep6.gruyere.persistance.dao.DaoProduit;
 import fr.jerep6.gruyere.persistance.dao.DaoUtilisateur;
@@ -33,28 +35,25 @@ public class ControllerCompteClient {
   private DaoProduit daoProduit;
 
   @RequestMapping(value = "/authentification", method = RequestMethod.GET)
-  public String index(Model model, @RequestParam (required=false) String urlCible) {
+  public String index(Model model, @RequestParam(required = false) String urlCible) {
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/authentification");
     tplMiddle.put("frg", ".authentification");
     model.addAttribute("tpl_middle", tplMiddle);
-	model.addAttribute("url_cible", urlCible);
+    model.addAttribute("url_cible", urlCible);
     return "index";
   }
 
   @RequestMapping(value = "/authentification-process", method = RequestMethod.POST)
   public String connexion(Model model, @RequestParam("login") String login,
-      @RequestParam("pwd") String pwd, @RequestParam (required=false) String urlCible) {
+      @RequestParam("pwd") String pwd, @RequestParam(required = false) String urlCible) {
 
     Utilisateur utilisateur = daoUtilisateur.connecter(login, pwd);
     if (utilisateur == null) {
       LOGGER.warn("Login fail");
       return "redirect:/authentification";
     }
-	else if (urlCible != null){
-		return "redirect:" + urlCible;
-	}
     else {
       model.addAttribute("utilisateur", utilisateur);
       Map<String, String> tplMiddle = new HashMap<>();
@@ -62,7 +61,7 @@ public class ControllerCompteClient {
       tplMiddle.put("frg", ".authentification");
       model.addAttribute("tpl_middle", tplMiddle);
 
-      return "redirect:/";
+      return "redirect:" + (Strings.isNullOrEmpty(urlCible) ? "/" : urlCible);
     }
 
   }
