@@ -4,6 +4,10 @@
 <body>
 
 	<section class="row produit-list produit-list-catalogue">
+      <div class="col-sm-12 categorie-titre" th:if="${categorie} != null">
+        <h2 th:utext="${categorie}"></h2>
+      </div>
+  
       <div th:each="prod : ${produits}" class="col-sm-6 col-md-4">
         <div class="thumbnail">
 		  <a th:href="'/produits/'+${prod.techid}">
@@ -23,7 +27,7 @@
       <div class="col-sm-12">
         <div class="row">
           <div class="col-sm-12">
-            
+                      
               <div class="descriptif">
                 <h3 th:text="${produit.titre}"></h3>
                 <img th:src="${produit.image}" alt="" />

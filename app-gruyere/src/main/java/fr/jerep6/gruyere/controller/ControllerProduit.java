@@ -55,14 +55,15 @@ public class ControllerProduit {
   }
 
   @RequestMapping(value = "/produits", method = RequestMethod.GET)
-  public String listerProduitUtilisateur(Model model, @RequestParam("u") String utilisateurId) {
-    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitCategorie(utilisateurId);
+  public String listerProduitCategorie(Model model, @RequestParam("u") String categorie) {
+    List<ProduitDTO> produitsUtilisateur = daoProduit.listerProduitCategorie(categorie);
 
     Map<String, String> tplMiddle = new HashMap<>();
     tplMiddle.put("html", "fragments/produit-catalogue");
     tplMiddle.put("frg", ".produit-list-catalogue");
     model.addAttribute("tpl_middle", tplMiddle);
     model.addAttribute("produits", produitsUtilisateur);
+    model.addAttribute("categorie", categorie);
 
     return "index";
   }
