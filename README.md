@@ -9,3 +9,6 @@ Je vous propose de découvrir et d’exploiter les failles les plus communes, à
 Si vous souhaitez démystifier les termes XSS, CSRF, injection, sanitization ou encore CSP ce talk est fait pour vous !
 
 
+## SLIDES
+
+[Slides conférence bdx.io 16/10/2015](https://github.com/jerep6/web-security/blob/master/slides/BDXIO%20-%20S%C3%A9curit%C3%A9%20Frontend.pptx?raw=true)
