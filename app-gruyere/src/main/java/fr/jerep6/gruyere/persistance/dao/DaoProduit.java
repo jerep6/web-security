@@ -79,7 +79,7 @@ public class DaoProduit {
     StringBuilder produit = new StringBuilder();
     produit.append("SELECT distinct new " + ProduitDTO.class.getName());
     produit
-        .append("(p.techid, p.titre, p.description, p.prix, p.image, p.categorie, u.techid, u.login)");
+    .append("(p.techid, p.titre, p.description, p.prix, p.image, p.categorie, u.techid, u.login)");
     produit.append(" FROM " + Produit.class.getName() + " p");
     produit.append(" JOIN p.proprietaire u");
     produit.append(" WHERE p.techid =:PRD_ID");
@@ -111,14 +111,30 @@ public class DaoProduit {
     Object[] o = (Object[]) result;
     ProduitDTO p = new ProduitDTO();
 
-    p.setTechid((Integer) o[0]);
-    p.setTitre((String) o[1]);
-    p.setDescription((String) o[2]);
-    p.setPrix(((Double) o[3]).toString());
-    p.setImage((String) o[4]);
-    p.setCategorie((String) o[5]);
-    p.setUtilisateurId((Integer) o[6]);
-    p.setUtilisateurLogin((String) o[7]);
+    if (o[0] != null) {
+      p.setTechid((Integer) o[0]);
+    }
+    if (o[1] != null) {
+      p.setTitre((String) o[1]);
+    }
+    if (o[2] != null) {
+      p.setDescription((String) o[2]);
+    }
+    if (o[3] != null) {
+      p.setPrix(((Double) o[3]).toString());
+    }
+    if (o[4] != null) {
+      p.setImage((String) o[4]);
+    }
+    if (o[5] != null) {
+      p.setCategorie((String) o[5]);
+    }
+    if (o[6] != null) {
+      p.setUtilisateurId((Integer) o[6]);
+    }
+    if (o[7] != null) {
+      p.setUtilisateurLogin((String) o[7]);
+    }
     return p;
   }
 
