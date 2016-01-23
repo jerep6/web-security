@@ -5,3 +5,9 @@ body {
 
 a {
   color: #333; }
+
+.product-detail .product-title {
+  color: red; }
+
+.product-detail .product-price {
+  font-weight: bold; }

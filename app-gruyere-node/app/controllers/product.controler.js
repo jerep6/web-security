@@ -1,15 +1,15 @@
 'use strict';
 
+var productService = require("../services/product.service");
+
 exports.homePage = function(req, res) {
   res.render('home-page', { title: 'Express' });
 };
 
 exports.productDetails = function(req, res) {
+  var product = productService.getProduct(req.params.productId);
   res.render('product-details-page', {
-    title: 'Produit ' +req.params.productId,
-    product: {
-      name: "chaussures",
-      price: "35€"
-    }
+      'product': product,
+      'title': product.name
   });
 };
