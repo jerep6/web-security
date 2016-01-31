@@ -3,22 +3,24 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "database": "node ./bin/database"
   },
   "dependencies": {
-    "body-parser": "~1.13.2",
-    "cookie-parser": "~1.3.5",
-    "debug": "~2.2.0",
+    "body-parser": "1.13.2",
+    "cookie-parser": "1.3.5",
+    "debug": "2.2.0",
     "express": "4.13.1",
     "glob": "6.0.4",
-    "jade": "~1.11.0",
     "lodash": "4.0.0",
     "morgan": "~1.6.1",
-    "nunjucks": "2.3.0"
+    "mysql": "2.10.2",
+    "nunjucks": "2.3.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "gulp": "3.9.0",
-    "gulp-sass": "^2.1.1",
-    "nodemon": "^1.8.1"
+    "gulp-sass": "2.1.1",
+    "nodemon": "1.8.1"
   }
 }
