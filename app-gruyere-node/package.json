@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "database": "node ./bin/database"
+    "start": "bash ./bin/mysql.sh start && node ./bin/www",
+    "database-init": "bash ./bin/mysql.sh start && node ./bin/database",
+    "database-stop": "bash ./bin/mysql.sh stop",
+    "gulp" : "./node_modules/.bin/gulp"
   },
   "dependencies": {
     "body-parser": "1.13.2",

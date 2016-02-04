@@ -14,7 +14,6 @@ gulp.task('watch', function () {
 
 
 gulp.task('sass', function () {
-  console.log('----------');
   gulp.src(PATHS.clientSass)
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./public/styles/'));
