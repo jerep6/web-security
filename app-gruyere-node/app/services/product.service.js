@@ -9,6 +9,6 @@ exports.getProduct = function (productId) {
   };
 };
 
-exports.productsByCategory = function (category) {
-  return productRepository.productsByCategory(category)
+exports.listProducts = function (category) {
+  return productRepository.listProducts(category)
 };

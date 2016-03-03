@@ -1,5 +1,7 @@
 {% extends "./layout/parent-layout.view.html" %}
 
 {% block bodyContent %}
-  HOME PAGE
+  HOME PAGE {{session.user}}
+
+{# {{ products | dump }} #}
 {% endblock %}
