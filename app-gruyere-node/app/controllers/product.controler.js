@@ -4,9 +4,6 @@ var productService = require("../services/product.service");
 
 
 exports.homePage = function(req, res) {
-  res.locals.session = req.session;
-  console.log('--->', req.session);
-
   var product = productService.listProducts();
   product.then(function(data) {
     res.render('home-page', {

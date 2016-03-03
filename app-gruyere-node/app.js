@@ -35,7 +35,12 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { httpOnly: false }
-}))
+}));
+
+app.use(function(req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
 
 
 // Globbing routing files
