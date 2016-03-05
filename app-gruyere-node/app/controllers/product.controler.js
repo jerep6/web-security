@@ -1,7 +1,8 @@
 'use strict';
 
-var productService = require("../services/product.service");
-
+var productService = require('../services/product.service'),
+    safetyUtils = require('../utils/safety.utils'),
+    entities = new (require('html-entities').XmlEntities)();
 
 exports.homePage = function(req, res) {
   var product = productService.listProducts();
@@ -27,10 +28,12 @@ exports.productsByCategory = function(req, res) {
   var product = productService.listProducts(req.query.c);
 
   product.then(function(data) {
-    console.log('data', data);
-    res.render('product-details-page', {
-        'title': product.name,
-        'product': data
+    res.render('product-list-page', {
+        title: product.name,
+        product: data,
+        category: req.query.category
+        //category: safetyUtils.sanitizeString(req.query.category)
+        //category: entities.encode(req.query.category)
     });
   }).catch(function(e) {
       console.log(e);
