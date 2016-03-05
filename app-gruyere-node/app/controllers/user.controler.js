@@ -5,7 +5,6 @@ var userService = require("../services/user.service"),
 
 
 exports.authent = function(req, res) {
-
   userService.getUser(req.query.login, req.query.password)
     .then(function(user) {
       if(user) {

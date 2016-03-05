@@ -21,3 +21,20 @@ exports.listProducts = function (category) {
 
   return defer.promise;
 };
+
+exports.addComment = function (productId, comment, userId) {
+  var defer = Q.defer();
+
+  var request = 'INSERT INTO COMMENTS (COM_CONTENT, PRD_ID, USR_ID) VALUES (:comment, :prd, :usr)';
+  mysql.query(request, {comment: comment, prd: productId, usr: userId}, function(err, result, fields) {
+    if (err) {
+      console.error(err);
+      defer.reject(err);
+    }
+
+    console.log('mysql result ', result);
+    defer.resolve(result);
+  });
+
+  return defer.promise;
+};

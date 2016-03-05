@@ -4,19 +4,17 @@ var productService = require('../services/product.service'),
     safetyUtils = require('../utils/safety.utils'),
     entities = new (require('html-entities').XmlEntities)();
 
-exports.homePage = function(req, res) {
+exports.homePage = function(req, res, next) {
   var product = productService.listProducts();
   product.then(function(data) {
     res.render('home-page', {
       'title': product.name,
       'products': data
     });
-  }).catch(function(e) {
-    console.log('Error', e);
-  });
+  }).catch(next);
 };
 
-exports.productDetails = function(req, res) {
+exports.productDetails = function(req, res, next) {
   var product = productService.getProduct(req.params.productId);
   res.render('product-details-page', {
       'product': product,
@@ -24,7 +22,7 @@ exports.productDetails = function(req, res) {
   });
 };
 
-exports.productsByCategory = function(req, res) {
+exports.productsByCategory = function(req, res, next) {
   var product = productService.listProducts(req.query.c);
 
   product.then(function(data) {
@@ -35,7 +33,30 @@ exports.productsByCategory = function(req, res) {
         //category: safetyUtils.sanitizeString(req.query.category)
         //category: entities.encode(req.query.category)
     });
-  }).catch(function(e) {
-      console.log(e);
-  });
+  }).catch(next);
+};
+
+exports.addComment = function(req, res, next) {
+  req.session.user = {'USR_ID': '1'};
+
+  // Check form data
+  var error;
+  if(!req.session['user'] || !req.session['user']['USR_ID']) {
+    error = 'Veuillez vous connectez avant de poster un commentaire';
+  }
+  else if(!req.body['prd_id'] || !req.body['comment']) {
+    error = 'Veuillez remplir tous les champs.';
+  }
+
+  if(error) {
+    req.session['comment_error'] = error;
+    res.redirect(302, req.headers['referer'] || '/');
+  }
+  else {
+    productService.addComment(req.body['prd_id'], req.body['comment'], req.session['user']['USR_ID'])
+      .then(function(data) {
+        res.redirect(302, req.headers['referer'] || '/');
+    }).catch(next);
+  }
+
 };

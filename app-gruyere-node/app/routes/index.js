@@ -3,6 +3,7 @@
 module.exports = function(app) {
   var productController = require('../controllers/product.controler');
   var userController = require('../controllers/user.controler');
+  app.post('/api/comments/', productController.addComment);
 
   app.get('/', productController.homePage);
   app.get('/product/:productId', productController.productDetails);
@@ -10,4 +11,5 @@ module.exports = function(app) {
 
 
   app.get('/api/authent/', userController.authent);
+
 };

@@ -12,3 +12,7 @@ exports.getProduct = function (productId) {
 exports.listProducts = function (category) {
   return productRepository.listProducts(category)
 };
+
+exports.addComment = function (productId, comment, userId) {
+  return productRepository.addComment(productId, comment, userId);
+};
