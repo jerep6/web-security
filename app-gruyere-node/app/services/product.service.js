@@ -1,20 +1,5 @@
 'use strict';
-//var productRepository = require('../repositories/product.repository');
-
-exports.getAllProducts = function (){
-  return [
-    {
-      'name': "chaussure",
-      'price': "30€",
-      'comments': [{'id': "1", 'label': "super !"}]
-    },
-    {
-      'name': "sac",
-      'price': "10€",
-      'comments': [{'id': "1", 'label': "beau"}]
-    }
-  ];
-}
+var productRepository = require('../repositories/product.repository');
 
 exports.getProduct = function (productId) {
   return {
@@ -24,7 +9,10 @@ exports.getProduct = function (productId) {
   };
 };
 
-exports.productsByCategory = function (category) {
-  return null;
-  // return productRepository.productsByCategory(category)
+exports.listProducts = function (category) {
+  return productRepository.listProducts(category)
+};
+
+exports.addComment = function (productId, comment, userId) {
+  return productRepository.addComment(productId, comment, userId);
 };

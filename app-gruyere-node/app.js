@@ -4,8 +4,8 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   fileUtils = require('./app/utils/file.utils'),
-  nunjucks  = require('nunjucks');
-
+  nunjucks  = require('nunjucks'),
+  session = require('express-session');
 
 var app = express();
 
@@ -29,6 +29,18 @@ app.use(cookieParser());
 
 // Serve static resources
 app.use('/static/', express.static(path.resolve('./public')));
+
+app.use(session({
+  secret: 'mysecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { httpOnly: false }
+}));
+
+app.use(function(req, res, next) {
+  res.locals.session = req.session;
+  next();
+});
 
 
 // Globbing routing files
