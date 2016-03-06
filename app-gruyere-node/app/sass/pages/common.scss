@@ -1,9 +1,45 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: $background-color;
+  color: $primary-color;
+  font-family: $font-stack;
+  font-size: $primary-size;
 }
 
-a {
-  color: $primary-color;
+.container {
+  max-width: 800px;
+  position: relative;
+}
+
+header {
+  img {
+    width: 100%;
+  }
+
+  .navbar {
+    min-height: 30px;
+  }
+
+  .navbar, .navbar-default {
+    border-radius: 0 !important;
+  }
+
+  .navbar-nav {
+    float: left;
+    margin-left: 0;
+  }
+
+  .navbar-nav.navbar-right {
+    float: right;
+    margin-right: 0;
+  }
+
+  .nav > li > a {
+    text-transform: capitalize;
+  }
+
+  @media screen and (max-width: 767px) {
+    .nav > li > a {
+      padding: 3px 10px;
+    }
+  }
 }

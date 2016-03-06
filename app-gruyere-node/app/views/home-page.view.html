@@ -1,5 +1,26 @@
 {% extends "./layout/parent-layout.view.html" %}
 
 {% block bodyContent %}
-  HOME PAGE
+
+  <!-- Products List -->
+  <section class="row produit-list produit-list-catalogue">
+
+    {% for product in products %}
+      <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+          <a href="'/produits/'+{{product.techid}}">
+            <img src="{{productimage}}" alt="" />
+          </a>
+          <div class="caption">
+            <h3>{{product.titre}}</h3>
+            <p class="desc" th:text="${prod.description}"></p>
+            <p class="prix" th:text="${prod.prix}+€"></p>
+            <p><a th:href="'/produits/'+${prod.techid}" class="btn btn-primary" role="button">VOIR LA FICHE PRODUIT</a></p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+  </section>
+
 {% endblock %}

@@ -4,14 +4,18 @@ var productService = require("../services/product.service");
 
 
 exports.homePage = function(req, res) {
-  res.render('home-page', { title: 'Express' });
+  var products = productService.getAllProducts();
+  res.render('home-page', {
+      'title': 'App Gruyere Home',
+      'products': products
+  });
 };
 
 exports.productDetails = function(req, res) {
   var product = productService.getProduct(req.params.productId);
   res.render('product-details-page', {
-      'product': product,
-      'title': product.name
+      'title': product.name,
+      'product': product
   });
 };
 
@@ -21,8 +25,8 @@ exports.productsByCategory = function(req, res) {
   product.then(function(data) {
     console.log('data', data);
     res.render('product-details-page', {
-        'product': product,
         'title': product.name,
+        'product': product,
         'data': data
     });
   })
