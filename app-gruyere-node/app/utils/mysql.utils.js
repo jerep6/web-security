@@ -9,7 +9,15 @@ var connection = mysql.createConnection({
   multipleStatements: true
 });
 
-connection.connect();
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
+
 // For custom parameters :param_name
 connection.config.queryFormat = function (query, values) {
   if (!values) return query;

@@ -13,6 +13,7 @@ if [ $1 = "start" ]; then
   elif [ "$running" = "false" ]; then
     echo "Container $CONTAINER_NAME exists. Start it !"
     docker start $CONTAINER_NAME
+    sleep 10
 
   else
     echo "Container $CONTAINER_NAME exist. Run it !"

@@ -9,8 +9,12 @@ exports.getProduct = function (productId) {
   };
 };
 
-exports.listProducts = function (category) {
-  return productRepository.listProducts(category)
+exports.listProductsHome = function () {
+  return productRepository.listProducts();
+};
+
+exports.listProductsByCategory = function (categ) {
+  return productRepository.listProducts(categ);
 };
 
 exports.addComment = function (productId, comment, userId) {

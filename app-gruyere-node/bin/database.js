@@ -8,6 +8,7 @@ var dabaseScriptContent = fs.readFileSync(databaseFile, "utf8")
 
 mysql.query(dabaseScriptContent, function (err, rows, fields) {
   if (err) {
+    console.log(err);
     throw err;
   }
   console.log('Database update');

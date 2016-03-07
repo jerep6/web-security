@@ -5,12 +5,12 @@ var productService = require('../services/product.service'),
     entities = new (require('html-entities').XmlEntities)();
 
 exports.homePage = function(req, res, next) {
-  var product = productService.listProducts();
-  product.then(function(data) {
-    res.render('home-page', {
-      'title': product.name,
-      'products': data
-    });
+  productService.listProductsHome()
+    .then(function(data) {
+      res.render('home-page', {
+        title: 'Vente en ligne',
+        products: data
+      });
   }).catch(next);
 };
 
@@ -23,7 +23,7 @@ exports.productDetails = function(req, res, next) {
 };
 
 exports.productsByCategory = function(req, res, next) {
-  var product = productService.listProducts(req.query.c);
+  var product = productService.listProductsByCategory(req.query.c);
 
   product.then(function(data) {
     res.render('product-list-page', {

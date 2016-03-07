@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.use('/static/', express.static(path.resolve('./public')));
 
 app.use(session({
+  name: 'SESSIONID',
   secret: 'mysecret',
   resave: false,
   saveUninitialized: true,

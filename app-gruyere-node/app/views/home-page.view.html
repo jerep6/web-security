@@ -8,14 +8,15 @@
     {% for product in products %}
       <div class="col-sm-6 col-md-4">
         <div class="thumbnail">
-          <a href="'/produits/'+{{product.techid}}">
-            <img src="{{productimage}}" alt="" />
+          <a href="/products/{{product['PRD_ID']}}" >
+            <img src="{{product['PRD_IMAGE']}}" alt="" />
           </a>
           <div class="caption">
-            <h3>{{product.titre}}</h3>
-            <p class="desc" th:text="${prod.description}"></p>
-            <p class="prix" th:text="${prod.prix}+€"></p>
-            <p><a th:href="'/produits/'+${prod.techid}" class="btn btn-primary" role="button">VOIR LA FICHE PRODUIT</a></p>
+            <h3>{{product['PRD_TITLE']}}</h3>
+            <p class="category"><a href="/products/?category={{product['PRD_CATEGORY']}}">{{product['PRD_CATEGORY']}}</a></p>
+            <p class="desc">{{product['PRD_DESCRIPTION']}}</p>
+            <p class="prix">{{product['PRD_PRICE']}}€</p>
+            <p><a href="/products/{{product['PRD_ID']}}" class="btn btn-primary" role="button">VOIR LA FICHE PRODUIT</a></p>
           </div>
         </div>
       </div>
@@ -23,5 +24,5 @@
 
   </section>
 
-{# {{ products | dump }} #}
+{{ products[0] | dump }}
 {% endblock %}
