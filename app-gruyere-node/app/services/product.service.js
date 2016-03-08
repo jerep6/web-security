@@ -1,12 +1,17 @@
 'use strict';
 var productRepository = require('../repositories/product.repository');
+var Q = require('q');
 
 exports.getProduct = function (productId) {
-  return {
-    'name': "chaussure",
-    'price': "30€",
-    'comments': [{'id': "1", 'label': "super !"},{'id': "2", 'label': "Quels sont les délais de livraison"}]
-  };
+  var promises = [
+    productRepository.getProduct(productId),
+    productRepository.getCommentsFromProduct(productId)
+  ];
+
+  return Q.all(promises).spread(function(product, comments){
+    product.comments = comments;
+    return product;
+  })
 };
 
 exports.listProductsHome = function () {

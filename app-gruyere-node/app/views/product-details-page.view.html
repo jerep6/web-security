@@ -2,13 +2,42 @@
 
 {% block bodyContent %}
   <div class="product-detail">
-    <h1 class="product-title">
-      {{product.name}}
-    </h1>
-    <span class="product-price">
-      {{product.price}}
-    </span>
+    <div class="description">
+      <h3>{{product['PRD_TITLE']}}</h3>
+      <img src="{{product['PRD_IMAGE']}}" alt=""/>
+
+      <div class="caption">
+        <p class="prix">{{product['PRD_PRICE']}}</p>
+
+        <p><a class="btn btn-primary" role="button" shape="rect">ACHETER</a></p>
+
+        <strong>Descriptif détaillé :</strong>
+        <p class="desc">{{product['PRD_DESCRIPTION']}}</p>
+
+        <strong>Catégorie :</strong>
+        <a shape="rect" href="/produits?u={{product['PRD_CATEGORY']}}">{{product['PRD_CATEGORY']}}</a>
+      </div>
+    </div>
+
+    <div class="comments">
+      <h3>Questions / Réponses</h3>
+      <ul class="media-list commentaires ">
+        {% for comment in product.comments %}
+        <li class="media">
+          <div class="media-left">
+            <a href="#" shape="rect">
+              <img class="media-object" src="/resources/img/commentaire.svg" alt="">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{comment['USR_LOGIN']}}</h4>
+            <p>{{comment['COM_CONTENT']}}</p>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 
-{# {{ data | dump }} #}
+{{ product | dump }}
 {% endblock %}

@@ -16,14 +16,17 @@ exports.homePage = function(req, res, next) {
 
 exports.productDetails = function(req, res, next) {
   var product = productService.getProduct(req.params.productId);
-  res.render('product-details-page', {
-      'product': product,
-      'title': product.name
-  });
+
+  product.then(function(data) {
+    res.render('product-details-page', {
+      'title': product.name,
+      'product': data
+    });
+  }).catch(next);
 };
 
 exports.productsByCategory = function(req, res, next) {
-  var product = productService.listProductsByCategory(req.query.c);
+  var product = productService.listProductsByCategory(req.query.category);
 
   product.then(function(data) {
     res.render('product-list-page', {
