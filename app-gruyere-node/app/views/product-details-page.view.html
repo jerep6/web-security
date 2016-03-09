@@ -36,6 +36,18 @@
         </li>
         {% endfor %}
       </ul>
+
+      <div class="row post-comment">
+        <div class="col-sm-12">
+          <h3>Poser une question</h3>
+          <form action="/api/comments" enctype="application/x-www-form-urlencoded" method="post">
+            <textarea name="comment" rows="3" class="form-control"></textarea>
+            <button class="btn btn-default" type="submit">Soumettre</button>
+            <input type="hidden" name="prd_id" value="{{product['PRD_ID']}}"/>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
 

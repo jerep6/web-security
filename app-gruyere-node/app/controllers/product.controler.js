@@ -39,7 +39,7 @@ exports.productsByCategory = function(req, res, next) {
   }).catch(next);
 };
 
-exports.addComment = function(req, res, next) {
+xexports.addComment = function(req, res, next) {
   req.session.user = {'USR_ID': '1'};
 
   // Check form data
