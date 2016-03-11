@@ -24,4 +24,3 @@ if [ $1 = "start" ]; then
 elif [ $1 = "stop" ]; then
   docker stop $CONTAINER_NAME
 fi
-
