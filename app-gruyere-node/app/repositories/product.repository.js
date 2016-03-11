@@ -47,7 +47,7 @@ exports.listProducts = function (category) {
   var request = 'SELECT * FROM PRODUCT';
 
   if(category) {
-    request += 'WHERE PRD_CATEGORY="'+category+'"';
+    request += ' WHERE PRD_CATEGORY="'+category+'"';
   }
 
   mysql.query(request, function(err, rows, fields) {
