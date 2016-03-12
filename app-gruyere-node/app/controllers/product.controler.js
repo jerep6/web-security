@@ -31,7 +31,7 @@ exports.productsByCategory = function(req, res, next) {
   product.then(function(data) {
     res.render('product-list-page', {
         title: product.name,
-        product: data,
+        products: data,
         category: req.query.category
         //category: safetyUtils.sanitizeString(req.query.category)
         //category: entities.encode(req.query.category)
@@ -39,7 +39,7 @@ exports.productsByCategory = function(req, res, next) {
   }).catch(next);
 };
 
-xexports.addComment = function(req, res, next) {
+exports.addComment = function(req, res, next) {
   req.session.user = {'USR_ID': '1'};
 
   // Check form data

@@ -1,4 +1,4 @@
-{% extends "./layout/parent-layout.view.html" %}
+{% extends "./layouts/parent-layout.view.html" %}
 
 {% block bodyContent %}
   <div class="title">
@@ -6,5 +6,12 @@
     <img src="/static/images/category-{{category}}.png" />
   </div>
 
-  Liste des produits ici
+  <!-- Products List -->
+  <section class="row produit-list produit-list-catalogue">
+    {% for product in products %}
+    {% include "./blocks/product-preview.html" %}
+    {% endfor %}
+  </section>
+
+{{ product | dump }}
 {% endblock %}
