@@ -19,7 +19,8 @@ exports.listProductsHome = function () {
 };
 
 exports.listProductsByCategory = function (categ) {
-  return productRepository.listProducts(categ);
+  //TODO : call repository with categ parameter
+  return Q.resolve([]);
 };
 
 exports.addComment = function (productId, comment, userId) {
