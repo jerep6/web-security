@@ -38,12 +38,11 @@ exports.listProducts = function (category) {
   var defer = Q.defer();
 
   var request = "SELECT PRD_ID, PRD_TITLE, PRD_DESCRIPTION, PRD_PRICE, PRD_IMAGE, PRD_CATEGORY FROM PRODUCT ";
-
   if(category) {
     request += " WHERE PRD_CATEGORY='" + category + "'";
   }
-  console.log('SQL request = ', request);
 
+  console.log('SQL request = ', request);
   mysql.query(request, function(err, rows, fields) {
     if (err) { defer.reject(err);}
     defer.resolve(rows);
