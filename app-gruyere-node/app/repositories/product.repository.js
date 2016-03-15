@@ -8,12 +8,7 @@ exports.getProduct = function (productId){
   var request = 'SELECT * FROM PRODUCT WHERE PRD_ID = :prdId';
 
   mysql.query(request, {prdId: productId}, function(err, result, fields) {
-    if (err) {
-      console.error(err);
-      defer.reject(err);
-    }
-
-    console.log('mysql result product ', JSON.stringify(result[0]));
+    if (err) {defer.reject(err);}
     defer.resolve(result[0]);
   });
 
@@ -25,15 +20,13 @@ exports.getCommentsFromProduct = function (productId){
   var defer = Q.defer();
 
   var request = 'SELECT * FROM COMMENTS comments ';
-  request += 'INNER JOIN SECU_USERS users on comments.USR_ID=users.USR_ID';
-  request += ' WHERE PRD_ID = :prdId';
+  request += 'INNER JOIN SECU_USERS users on comments.USR_ID=users.USR_ID ';
+  request += 'WHERE PRD_ID = :prdId';
   mysql.query(request, {prdId: productId}, function(err, result, fields) {
     if (err) {
       console.error(err);
       defer.reject(err);
     }
-
-    console.log('mysql result comments ', JSON.stringify(result));
     defer.resolve(result);
   });
 
@@ -44,17 +37,14 @@ exports.getCommentsFromProduct = function (productId){
 exports.listProducts = function (category) {
   var defer = Q.defer();
 
-  var request = 'SELECT * FROM PRODUCT';
-
+  var request = "SELECT PRD_ID, PRD_TITLE, PRD_DESCRIPTION, PRD_PRICE, PRD_IMAGE, PRD_CATEGORY FROM PRODUCT ";
   if(category) {
-    request += ' WHERE PRD_CATEGORY="'+category+'"';
+    request += " WHERE PRD_CATEGORY='" + category + "'";
   }
 
+  console.log('SQL request = ', request);
   mysql.query(request, function(err, rows, fields) {
-    if (err) {
-      defer.reject(err);
-    }
-
+    if (err) { defer.reject(err);}
     defer.resolve(rows);
   });
 

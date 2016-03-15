@@ -5,6 +5,7 @@
   "scripts": {
     "start": "bash ./bin/mysql.sh start && node ./bin/www",
     "database-init": "bash ./bin/mysql.sh start && node ./bin/database",
+    "database-reset": "node ./bin/database",
     "database-stop": "bash ./bin/mysql.sh stop",
     "gulp": "./node_modules/.bin/gulp",
     "nsp": "./node_modules/nsp/bin/nsp check"

@@ -1,28 +1,13 @@
-{% extends "./layout/parent-layout.view.html" %}
+{% extends "./layouts/parent-layout.view.html" %}
 
 {% block bodyContent %}
 
   <!-- Products List -->
   <section class="row produit-list produit-list-catalogue">
-
     {% for product in products %}
-      <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-          <a href="/products/{{product['PRD_ID']}}" >
-            <img src="{{product['PRD_IMAGE']}}" alt="" />
-          </a>
-          <div class="caption">
-            <h3>{{product['PRD_TITLE']}}</h3>
-            <p class="category"><a href="/products/?category={{product['PRD_CATEGORY']}}">{{product['PRD_CATEGORY']}}</a></p>
-            <p class="desc">{{product['PRD_DESCRIPTION']}}</p>
-            <p class="price">{{product['PRD_PRICE']}} €</p>
-            <p class="btnfp"><a href="/products/{{product['PRD_ID']}}" class="btn btn-primary" role="button">VOIR LA FICHE PRODUIT</a></p>
-          </div>
-        </div>
-      </div>
+      {% include "./blocks/product-preview.html" %}
     {% endfor %}
-
   </section>
 
-{{ products[0] | dump }}
+{# {{ products[0] | dump }} #}
 {% endblock %}

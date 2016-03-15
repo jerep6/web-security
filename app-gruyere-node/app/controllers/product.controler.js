@@ -31,7 +31,7 @@ exports.productsByCategory = function(req, res, next) {
   product.then(function(data) {
     res.render('product-list-page', {
         title: product.name,
-        product: data,
+        products: data,
         category: req.query.category
         //category: safetyUtils.sanitizeString(req.query.category)
         //category: entities.encode(req.query.category)
