@@ -7,7 +7,7 @@
       <img src="{{product['PRD_IMAGE']}}" alt=""/>
 
       <div class="caption">
-        <p class="prix">{{product['PRD_PRICE']}}</p>
+        <p class="price">{{product['PRD_PRICE']}} €</p>
 
         <p><a class="btn btn-primary" role="button" shape="rect">ACHETER</a></p>
 
@@ -39,7 +39,7 @@
 
       <div class="row post-comment">
         <div class="col-sm-12">
-          <h3>Poser une question</h3>
+          <h2>Poser une question</h2>
           <form action="/api/comments" enctype="application/x-www-form-urlencoded" method="post">
             <textarea name="comment" rows="3" class="form-control"></textarea>
             <button class="btn btn-default" type="submit">Soumettre</button>

@@ -43,3 +43,10 @@ header {
     }
   }
 }
+
+.price{
+  font-weight: $price-weight;
+  font-size : $price-size;
+  color: $price-color;
+  text-align: center;
+}
