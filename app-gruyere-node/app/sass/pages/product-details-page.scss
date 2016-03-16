@@ -1,8 +1,38 @@
 .product-detail {
-  .product-title {
-    color: red;
+  h3 {
+    font-size: 30px;
   }
-  .product-price {
-    font-weight: bold;
+  .description {
+    .desc {
+      text-align: justify;
+    }
+  }
+
+  .comments{
+    margin-top: 40px;
+    padding:10px 120px;
+    background-color: #f7f7f7;
+
+    h2 {
+      font-size: 20px;
+      padding-left: 10px;
+    }
+
+    h2, h4 {
+      font-weight: bold;
+    }
+
+    li {
+      border-bottom: 1px solid #C4C4C4;
+    }
+
+    li p {
+      font-style: italic;
+    }
+
+    button {
+      float: right;
+      margin-top: 4px;
+    }
   }
 }
