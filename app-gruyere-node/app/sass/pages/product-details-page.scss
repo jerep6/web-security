@@ -2,16 +2,33 @@
   h3 {
     font-size: 30px;
   }
-  .description {
+
+  .description>img {
+    width: 320px;
+    float: left;
+  }
+  .caption{
+    padding-top: 40px;
+    margin-left: 380px;
+
+    .price{
+      font-size: 30px;
+    }
+    .btn{
+      margin: 20px 0 40px 0;
+      display: block;
+    }
+
     .desc {
       text-align: justify;
     }
   }
-
   .comments{
     margin-top: 40px;
     padding:10px 120px;
-    background-color: #f7f7f7;
+    background-color: #eee;
+    display: inline-block;
+    width: 100%;
 
     h2 {
       font-size: 20px;
