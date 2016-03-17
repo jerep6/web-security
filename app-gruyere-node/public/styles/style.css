@@ -32,8 +32,68 @@ header .nav > li > a {
   header .nav > li > a {
     padding: 3px 10px; } }
 
-.product-detail .product-title {
-  color: red; }
+.price {
+  font-weight: bold;
+  font-size: 20px;
+  color: #1B1B1B;
+  text-align: center; }
 
-.product-detail .product-price {
-  font-weight: bold; }
+h3 {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 22px; }
+
+.thumbnail > a img {
+  max-height: 200px; }
+
+.thumbnail .caption .category > a {
+  text-decoration: underline; }
+
+.thumbnail .caption .category a:hover {
+  text-decoration: none; }
+
+.thumbnail .caption .desc {
+  height: 160px;
+  overflow: hidden; }
+
+.thumbnail .caption p.btnfp {
+  text-align: center; }
+
+.product-detail h3 {
+  font-size: 30px; }
+
+.product-detail .description > img {
+  width: 320px;
+  float: left; }
+
+.product-detail .caption {
+  padding-top: 40px;
+  margin-left: 380px; }
+  .product-detail .caption .price {
+    font-size: 30px; }
+  .product-detail .caption .btn {
+    margin: 20px 0 40px 0;
+    display: block; }
+  .product-detail .caption .desc {
+    text-align: justify; }
+
+.product-detail .comments {
+  margin-top: 40px;
+  padding: 10px 120px;
+  background-color: #eee;
+  display: inline-block;
+  width: 100%; }
+  .product-detail .comments h2 {
+    font-size: 20px;
+    padding-left: 10px; }
+  .product-detail .comments h2, .product-detail .comments h4 {
+    font-weight: bold; }
+  .product-detail .comments li {
+    border-bottom: 1px solid #C4C4C4; }
+  .product-detail .comments li p {
+    font-style: italic; }
+  .product-detail .comments button {
+    float: right;
+    margin-top: 4px; }

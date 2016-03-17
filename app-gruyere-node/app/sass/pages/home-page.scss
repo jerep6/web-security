@@ -1,0 +1,30 @@
+h3 {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.thumbnail {
+  &>a img {
+    max-height: 200px;
+  }
+  .caption {
+    .category {
+      & > a {
+        text-decoration: underline;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+    }
+    .desc {
+      height: 160px;
+      overflow: hidden;
+    }
+    p.btnfp {
+      text-align: center;
+    }
+  }
+}
