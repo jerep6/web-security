@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 exports.sanitizeString = function (unsafeString) {
-  return (unsafeString || '').replace(/script/g, '');
+  return (unsafeString || '').replace(/script/gi, '');
 };
 
 exports.escape = function(val) {
