@@ -62,7 +62,7 @@ VALUES (
  'Un parfum captivant et sensuel. Une invitation au voyage aux portes de l''Orient. Une goutte déposée derrière l''oreille, au creux du coude, au point de pulsation du poignet. Flacon de 50 ML Famille olfactive : Oriental & Epicé',
  90.55,
  '/static/images/products/parfum.jpg',
- 'cosmétique',
+ 'cosmetique',
  1);
 
 INSERT INTO PRODUCT (PRD_ID, PRD_TITLE, PRD_DESCRIPTION, PRD_PRICE,PRD_IMAGE, PRD_CATEGORY, USR_ID)
