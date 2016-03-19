@@ -51,10 +51,13 @@ h1 {
   h1 img {
     height: 50px; }
 
+.thumbnail > a img {
+  max-height: 200px; }
+
 .thumbnail .caption .category > a {
   text-decoration: underline; }
 
-.thumbnail .caption .category > a.hover {
+.thumbnail .caption .category a:hover {
   text-decoration: none; }
 
 .thumbnail .caption .desc {
@@ -67,13 +70,27 @@ h1 {
 .product-detail h3 {
   font-size: 30px; }
 
-.product-detail .description .desc {
-  text-align: justify; }
+.product-detail .description > img {
+  width: 320px;
+  float: left; }
+
+.product-detail .caption {
+  padding-top: 40px;
+  margin-left: 380px; }
+  .product-detail .caption .price {
+    font-size: 30px; }
+  .product-detail .caption .btn {
+    margin: 20px 0 40px 0;
+    display: block; }
+  .product-detail .caption .desc {
+    text-align: justify; }
 
 .product-detail .comments {
   margin-top: 40px;
   padding: 10px 120px;
-  background-color: #f7f7f7; }
+  background-color: #eee;
+  display: inline-block;
+  width: 100%; }
   .product-detail .comments h2 {
     font-size: 20px;
     padding-left: 10px; }

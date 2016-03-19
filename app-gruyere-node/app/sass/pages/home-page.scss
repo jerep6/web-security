@@ -15,18 +15,25 @@ h1{
 }
 
 
-.thumbnail .caption {
-  .category>a {
-    text-decoration: underline;
+.thumbnail {
+  &>a img {
+    max-height: 200px;
   }
-  .category>a.hover {
-    text-decoration: none;
-  }
-  .desc {
-    height: 160px;
-    overflow: hidden;
-  }
-  p.btnfp {
-    text-align:center;
+  .caption {
+    .category {
+      & > a {
+        text-decoration: underline;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+    }
+    .desc {
+      height: 160px;
+      overflow: hidden;
+    }
+    p.btnfp {
+      text-align: center;
+    }
   }
 }
