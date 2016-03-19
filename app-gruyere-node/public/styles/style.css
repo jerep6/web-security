@@ -43,7 +43,13 @@ h3 {
   font-weight: bold;
   margin-top: 5px;
   margin-bottom: 15px;
-  font-size: 22px; }
+  font-size: 22px;
+  height: 48px; }
+
+h1 {
+  padding-bottom: 10px; }
+  h1 img {
+    height: 50px; }
 
 .thumbnail .caption .category > a {
   text-decoration: underline; }
