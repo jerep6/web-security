@@ -12,9 +12,5 @@ module.exports = function(app) {
 
   app.get('/api/authent/', userController.authent);
   app.post('/api/comments/', productController.addComment);
-  app.post('/api/csp/', function (req, res) {
-    logger.warn('CSP report : ', req.body);
-    res.end();
-  });
 
 };

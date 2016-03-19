@@ -27,12 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(function (req, res, next) {
-  res.setHeader('Content-Security-Policy', "script-src 'self'; report-uri /api/csp");
-  next();
-});
-
-
 // Serve static resources
 app.use('/static/', express.static(path.resolve('./public')));
 
