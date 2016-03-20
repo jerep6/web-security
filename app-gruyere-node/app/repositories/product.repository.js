@@ -34,7 +34,7 @@ exports.getCommentsFromProduct = function (productId){
 };
 
 
-exports.listProducts = function (category) {
+exports.listProducts = function () {
   var defer = Q.defer();
 
   var request = "SELECT PRD_ID, PRD_TITLE, PRD_DESCRIPTION, PRD_PRICE, PRD_IMAGE, PRD_CATEGORY FROM PRODUCT ";
