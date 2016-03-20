@@ -26,7 +26,7 @@ exports.productDetails = function(req, res, next) {
 };
 
 exports.productsByCategory = function(req, res, next) {
-  var product = productService.listProductsByCategory(req.query.category);
+  var product = productService.listProductsByCategory();
 
   product.then(function(data) {
     res.render('product-list-page', {
