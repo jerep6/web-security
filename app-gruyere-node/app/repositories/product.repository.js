@@ -1,6 +1,7 @@
 var mysql = require('../utils/mysql.utils')
     Q     = require('q');
 
+var REGEX_CATEGORY = new RegExp("^[a-z]*$");
 
 exports.getProduct = function (productId){
   var defer = Q.defer();
